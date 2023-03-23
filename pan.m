@@ -20,13 +20,13 @@
 		_m = 3; goto P999;
 
 		 /* PROC req_button */
-	case 3: // STATE 1 - sec_env.pml:125 - [(!(floor_request_made[(_pid-4)]))] (0:0:0 - 1)
+	case 3: // STATE 1 - sec_env.pml:142 - [(!(floor_request_made[(_pid-4)]))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[4][1] = 1;
 		if (!( !(((int)now.floor_request_made[ Index((((int)((P4 *)_this)->_pid)-4), 4) ]))))
 			continue;
 		_m = 3; goto P999; /* 0 */
-	case 4: // STATE 2 - sec_env.pml:127 - [request!(_pid-4)] (0:0:0 - 1)
+	case 4: // STATE 2 - sec_env.pml:144 - [request!(_pid-4)] (0:0:0 - 1)
 		IfNotBlocked
 		reached[4][2] = 1;
 		if (q_full(now.request))
@@ -41,7 +41,7 @@
 		qsend(now.request, 0, (((int)((P4 *)_this)->_pid)-4), 1);
 		if (q_zero(now.request)) { boq = now.request; };
 		_m = 2; goto P999; /* 0 */
-	case 5: // STATE 3 - sec_env.pml:128 - [floor_request_made[(_pid-4)] = 1] (0:0:1 - 1)
+	case 5: // STATE 3 - sec_env.pml:145 - [floor_request_made[(_pid-4)] = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[4][3] = 1;
 		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index((((int)((P4 *)_this)->_pid)-4), 4) ]);
@@ -51,14 +51,14 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 6: // STATE 8 - sec_env.pml:131 - [-end-] (0:0:0 - 1)
+	case 6: // STATE 8 - sec_env.pml:148 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
 		reached[4][8] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 
 		 /* PROC req_handler */
-	case 7: // STATE 1 - sec_env.pml:116 - [request?dest] (0:0:1 - 1)
+	case 7: // STATE 1 - sec_env.pml:133 - [request?dest] (0:0:1 - 1)
 		reached[3][1] = 1;
 		if (q_zero(now.request))
 		{	if (boq != now.request) continue;
@@ -106,7 +106,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 8: // STATE 2 - sec_env.pml:117 - [go!dest] (0:0:0 - 1)
+	case 8: // STATE 2 - sec_env.pml:134 - [go!dest] (0:0:0 - 1)
 		IfNotBlocked
 		reached[3][2] = 1;
 		if (q_full(now.go))
@@ -121,7 +121,7 @@
 		qsend(now.go, 0, ((int)((P3 *)_this)->dest), 1);
 		if (q_zero(now.go)) { boq = now.go; };
 		_m = 2; goto P999; /* 0 */
-	case 9: // STATE 3 - sec_env.pml:118 - [served?1] (0:0:0 - 1)
+	case 9: // STATE 3 - sec_env.pml:135 - [served?1] (0:0:0 - 1)
 		reached[3][3] = 1;
 		if (q_zero(now.served))
 		{	if (boq != now.served) continue;
@@ -170,7 +170,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 10: // STATE 7 - sec_env.pml:120 - [-end-] (0:0:0 - 1)
+	case 10: // STATE 7 - sec_env.pml:137 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
 		reached[3][7] = 1;
 		if (!delproc(1, II)) continue;
@@ -240,10 +240,10 @@
 		qsend(now.move, 0, 1, 1);
 		if (q_zero(now.move)) { boq = now.move; };
 		_m = 2; goto P999; /* 0 */
-	case 13: // STATE 3 - sec_env.pml:73 - [((dest<current_floor))] (0:0:0 - 1)
+	case 13: // STATE 3 - sec_env.pml:73 - [((dest>current_floor))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][3] = 1;
-		if (!((((int)((P2 *)_this)->dest)<((int)now.current_floor))))
+		if (!((((int)((P2 *)_this)->dest)>((int)now.current_floor))))
 			continue;
 		_m = 3; goto P999; /* 0 */
 	case 14: // STATE 4 - sec_env.pml:76 - [floor_reached?1] (0:0:0 - 1)
@@ -326,33 +326,48 @@
 		qsend(now.move, 0, 0, 1);
 		if (q_zero(now.move)) { boq = now.move; };
 		_m = 2; goto P999; /* 0 */
-	case 18: // STATE 10 - sec_env.pml:83 - [move?0] (0:0:0 - 1)
-		reached[2][10] = 1;
-		if (q_zero(now.move))
-		{	if (boq != now.move) continue;
+	case 18: // STATE 8 - sec_env.pml:82 - [update_cabin_door!1] (0:0:0 - 1)
+		IfNotBlocked
+		reached[2][8] = 1;
+		if (q_full(now.update_cabin_door))
+			continue;
+#ifdef HAS_CODE
+		if (readtrail && gui) {
+			char simtmp[64];
+			sprintf(simvals, "%d!", now.update_cabin_door);
+		sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);		}
+#endif
+		
+		qsend(now.update_cabin_door, 0, 1, 1);
+		if (q_zero(now.update_cabin_door)) { boq = now.update_cabin_door; };
+		_m = 2; goto P999; /* 0 */
+	case 19: // STATE 9 - sec_env.pml:84 - [cabin_door_updated?1] (0:0:0 - 1)
+		reached[2][9] = 1;
+		if (q_zero(now.cabin_door_updated))
+		{	if (boq != now.cabin_door_updated) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.move) == 0) continue;
+		if (q_len(now.cabin_door_updated) == 0) continue;
 
 		XX=1;
-		if (0 != qrecv(now.move, 0, 0, 0)) continue;
+		if (1 != qrecv(now.cabin_door_updated, 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.move-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.cabin_door_updated-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.move, XX-1, 0, 1);
+		qrecv(now.cabin_door_updated, XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.move);
-			sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);
+			sprintf(simvals, "%d?", now.cabin_door_updated);
+			sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.move))
+		if (q_zero(now.cabin_door_updated))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -375,14 +390,103 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 19: // STATE 15 - sec_env.pml:86 - [((dest>current_floor))] (0:0:0 - 1)
+	case 20: // STATE 10 - sec_env.pml:85 - [update_cabin_door!0] (0:0:0 - 1)
+		IfNotBlocked
+		reached[2][10] = 1;
+		if (q_full(now.update_cabin_door))
+			continue;
+#ifdef HAS_CODE
+		if (readtrail && gui) {
+			char simtmp[64];
+			sprintf(simvals, "%d!", now.update_cabin_door);
+		sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);		}
+#endif
+		
+		qsend(now.update_cabin_door, 0, 0, 1);
+		if (q_zero(now.update_cabin_door)) { boq = now.update_cabin_door; };
+		_m = 2; goto P999; /* 0 */
+	case 21: // STATE 13 - sec_env.pml:88 - [cabin_door_updated?0] (0:0:0 - 1)
+		reached[2][13] = 1;
+		if (q_zero(now.cabin_door_updated))
+		{	if (boq != now.cabin_door_updated) continue;
+		} else
+		{	if (boq != -1) continue;
+		}
+		if (q_len(now.cabin_door_updated) == 0) continue;
+
+		XX=1;
+		if (0 != qrecv(now.cabin_door_updated, 0, 0, 0)) continue;
+		
+#ifndef BFS_PAR
+		if (q_flds[((Q0 *)qptr(now.cabin_door_updated-1))->_t] != 1)
+			Uerror("wrong nr of msg fields in rcv");
+#endif
+		;
+		qrecv(now.cabin_door_updated, XX-1, 0, 1);
+		
+#ifdef HAS_CODE
+		if (readtrail && gui) {
+			char simtmp[32];
+			sprintf(simvals, "%d?", now.cabin_door_updated);
+			sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);
+		}
+#endif
+		if (q_zero(now.cabin_door_updated))
+		{	boq = -1;
+#ifndef NOFAIR
+			if (fairness
+			&& !(trpt->o_pm&32)
+			&& (now._a_t&2)
+			&&  now._cnt[now._a_t&1] == II+2)
+			{	now._cnt[now._a_t&1] -= 1;
+#ifdef VERI
+				if (II == 1)
+					now._cnt[now._a_t&1] = 1;
+#endif
+#ifdef DEBUG
+			printf("%3ld: proc %d fairness ", depth, II);
+			printf("Rule 2: --cnt to %d (%d)\n",
+				now._cnt[now._a_t&1], now._a_t);
+#endif
+				trpt->o_pm |= (32|64);
+			}
+#endif
+
+		};
+		_m = 4; goto P999; /* 0 */
+	case 22: // STATE 14 - sec_env.pml:89 - [floor_request_made[dest] = 0] (0:0:1 - 1)
+		IfNotBlocked
+		reached[2][14] = 1;
+		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 4) ]);
+		now.floor_request_made[ Index(((P2 *)_this)->dest, 4) ] = 0;
+#ifdef VAR_RANGES
+		logval("floor_request_made[main_control:dest]", ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 4) ]));
+#endif
+		;
+		_m = 3; goto P999; /* 0 */
+	case 23: // STATE 15 - sec_env.pml:90 - [served!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][15] = 1;
-		if (!((((int)((P2 *)_this)->dest)>((int)now.current_floor))))
+		if (q_full(now.served))
+			continue;
+#ifdef HAS_CODE
+		if (readtrail && gui) {
+			char simtmp[64];
+			sprintf(simvals, "%d!", now.served);
+		sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);		}
+#endif
+		
+		qsend(now.served, 0, 1, 1);
+		if (q_zero(now.served)) { boq = now.served; };
+		_m = 2; goto P999; /* 0 */
+	case 24: // STATE 26 - sec_env.pml:97 - [((dest<current_floor))] (0:0:0 - 1)
+		IfNotBlocked
+		reached[2][26] = 1;
+		if (!((((int)((P2 *)_this)->dest)<((int)now.current_floor))))
 			continue;
 		_m = 3; goto P999; /* 0 */
-	case 20: // STATE 16 - sec_env.pml:88 - [floor_reached?1] (0:0:0 - 1)
-		reached[2][16] = 1;
+	case 25: // STATE 27 - sec_env.pml:99 - [floor_reached?1] (0:0:0 - 1)
+		reached[2][27] = 1;
 		if (q_zero(now.floor_reached))
 		{	if (boq != now.floor_reached) continue;
 		} else
@@ -430,9 +534,9 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 21: // STATE 17 - sec_env.pml:89 - [current_floor = (current_floor-1)] (0:0:1 - 1)
+	case 26: // STATE 28 - sec_env.pml:100 - [current_floor = (current_floor-1)] (0:0:1 - 1)
 		IfNotBlocked
-		reached[2][17] = 1;
+		reached[2][28] = 1;
 		(trpt+1)->bup.oval = ((int)now.current_floor);
 		now.current_floor = (((int)now.current_floor)-1);
 #ifdef VAR_RANGES
@@ -440,15 +544,15 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 22: // STATE 18 - sec_env.pml:91 - [((current_floor==dest))] (0:0:0 - 1)
+	case 27: // STATE 29 - sec_env.pml:103 - [((current_floor==dest))] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][18] = 1;
+		reached[2][29] = 1;
 		if (!((((int)now.current_floor)==((int)((P2 *)_this)->dest))))
 			continue;
 		_m = 3; goto P999; /* 0 */
-	case 23: // STATE 19 - sec_env.pml:92 - [move!0] (0:0:0 - 1)
+	case 28: // STATE 30 - sec_env.pml:104 - [move!0] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][19] = 1;
+		reached[2][30] = 1;
 		if (q_full(now.move))
 			continue;
 #ifdef HAS_CODE
@@ -461,33 +565,48 @@
 		qsend(now.move, 0, 0, 1);
 		if (q_zero(now.move)) { boq = now.move; };
 		_m = 2; goto P999; /* 0 */
-	case 24: // STATE 22 - sec_env.pml:94 - [move?0] (0:0:0 - 1)
-		reached[2][22] = 1;
-		if (q_zero(now.move))
-		{	if (boq != now.move) continue;
+	case 29: // STATE 31 - sec_env.pml:105 - [update_cabin_door!1] (0:0:0 - 1)
+		IfNotBlocked
+		reached[2][31] = 1;
+		if (q_full(now.update_cabin_door))
+			continue;
+#ifdef HAS_CODE
+		if (readtrail && gui) {
+			char simtmp[64];
+			sprintf(simvals, "%d!", now.update_cabin_door);
+		sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);		}
+#endif
+		
+		qsend(now.update_cabin_door, 0, 1, 1);
+		if (q_zero(now.update_cabin_door)) { boq = now.update_cabin_door; };
+		_m = 2; goto P999; /* 0 */
+	case 30: // STATE 32 - sec_env.pml:107 - [cabin_door_updated?1] (0:0:0 - 1)
+		reached[2][32] = 1;
+		if (q_zero(now.cabin_door_updated))
+		{	if (boq != now.cabin_door_updated) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.move) == 0) continue;
+		if (q_len(now.cabin_door_updated) == 0) continue;
 
 		XX=1;
-		if (0 != qrecv(now.move, 0, 0, 0)) continue;
+		if (1 != qrecv(now.cabin_door_updated, 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.move-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.cabin_door_updated-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.move, XX-1, 0, 1);
+		qrecv(now.cabin_door_updated, XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.move);
-			sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);
+			sprintf(simvals, "%d?", now.cabin_door_updated);
+			sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.move))
+		if (q_zero(now.cabin_door_updated))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -510,24 +629,9 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 25: // STATE 29 - sec_env.pml:98 - [update_cabin_door!1] (0:0:0 - 1)
+	case 31: // STATE 33 - sec_env.pml:108 - [update_cabin_door!0] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][29] = 1;
-		if (q_full(now.update_cabin_door))
-			continue;
-#ifdef HAS_CODE
-		if (readtrail && gui) {
-			char simtmp[64];
-			sprintf(simvals, "%d!", now.update_cabin_door);
-		sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);		}
-#endif
-		
-		qsend(now.update_cabin_door, 0, 1, 1);
-		if (q_zero(now.update_cabin_door)) { boq = now.update_cabin_door; };
-		_m = 2; goto P999; /* 0 */
-	case 26: // STATE 30 - sec_env.pml:99 - [update_cabin_door!0] (0:0:0 - 1)
-		IfNotBlocked
-		reached[2][30] = 1;
+		reached[2][33] = 1;
 		if (q_full(now.update_cabin_door))
 			continue;
 #ifdef HAS_CODE
@@ -540,9 +644,58 @@
 		qsend(now.update_cabin_door, 0, 0, 1);
 		if (q_zero(now.update_cabin_door)) { boq = now.update_cabin_door; };
 		_m = 2; goto P999; /* 0 */
-	case 27: // STATE 31 - sec_env.pml:106 - [floor_request_made[dest] = 0] (0:0:1 - 1)
+	case 32: // STATE 36 - sec_env.pml:111 - [cabin_door_updated?0] (0:0:0 - 1)
+		reached[2][36] = 1;
+		if (q_zero(now.cabin_door_updated))
+		{	if (boq != now.cabin_door_updated) continue;
+		} else
+		{	if (boq != -1) continue;
+		}
+		if (q_len(now.cabin_door_updated) == 0) continue;
+
+		XX=1;
+		if (0 != qrecv(now.cabin_door_updated, 0, 0, 0)) continue;
+		
+#ifndef BFS_PAR
+		if (q_flds[((Q0 *)qptr(now.cabin_door_updated-1))->_t] != 1)
+			Uerror("wrong nr of msg fields in rcv");
+#endif
+		;
+		qrecv(now.cabin_door_updated, XX-1, 0, 1);
+		
+#ifdef HAS_CODE
+		if (readtrail && gui) {
+			char simtmp[32];
+			sprintf(simvals, "%d?", now.cabin_door_updated);
+			sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);
+		}
+#endif
+		if (q_zero(now.cabin_door_updated))
+		{	boq = -1;
+#ifndef NOFAIR
+			if (fairness
+			&& !(trpt->o_pm&32)
+			&& (now._a_t&2)
+			&&  now._cnt[now._a_t&1] == II+2)
+			{	now._cnt[now._a_t&1] -= 1;
+#ifdef VERI
+				if (II == 1)
+					now._cnt[now._a_t&1] = 1;
+#endif
+#ifdef DEBUG
+			printf("%3ld: proc %d fairness ", depth, II);
+			printf("Rule 2: --cnt to %d (%d)\n",
+				now._cnt[now._a_t&1], now._a_t);
+#endif
+				trpt->o_pm |= (32|64);
+			}
+#endif
+
+		};
+		_m = 4; goto P999; /* 0 */
+	case 33: // STATE 37 - sec_env.pml:112 - [floor_request_made[dest] = 0] (0:0:1 - 1)
 		IfNotBlocked
-		reached[2][31] = 1;
+		reached[2][37] = 1;
 		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 4) ]);
 		now.floor_request_made[ Index(((P2 *)_this)->dest, 4) ] = 0;
 #ifdef VAR_RANGES
@@ -550,9 +703,9 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 28: // STATE 32 - sec_env.pml:107 - [served!1] (0:0:0 - 1)
+	case 34: // STATE 38 - sec_env.pml:113 - [served!1] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][32] = 1;
+		reached[2][38] = 1;
 		if (q_full(now.served))
 			continue;
 #ifdef HAS_CODE
@@ -565,14 +718,14 @@
 		qsend(now.served, 0, 1, 1);
 		if (q_zero(now.served)) { boq = now.served; };
 		_m = 2; goto P999; /* 0 */
-	case 29: // STATE 37 - sec_env.pml:110 - [-end-] (0:0:0 - 3)
+	case 35: // STATE 54 - sec_env.pml:127 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][37] = 1;
+		reached[2][54] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 
 		 /* PROC elevator_engine */
-	case 30: // STATE 1 - sec_env.pml:56 - [move?1] (0:0:0 - 1)
+	case 36: // STATE 1 - sec_env.pml:56 - [move?1] (0:0:0 - 1)
 		reached[1][1] = 1;
 		if (q_zero(now.move))
 		{	if (boq != now.move) continue;
@@ -621,7 +774,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 31: // STATE 2 - sec_env.pml:58 - [move?0] (0:0:0 - 1)
+	case 37: // STATE 2 - sec_env.pml:58 - [move?0] (0:0:0 - 1)
 		reached[1][2] = 1;
 		if (q_zero(now.move))
 		{	if (boq != now.move) continue;
@@ -670,7 +823,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 32: // STATE 4 - sec_env.pml:59 - [floor_reached!1] (0:0:0 - 1)
+	case 38: // STATE 4 - sec_env.pml:59 - [floor_reached!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[1][4] = 1;
 		if (q_full(now.floor_reached))
@@ -685,14 +838,14 @@
 		qsend(now.floor_reached, 0, 1, 1);
 		if (q_zero(now.floor_reached)) { boq = now.floor_reached; };
 		_m = 2; goto P999; /* 0 */
-	case 33: // STATE 11 - sec_env.pml:62 - [-end-] (0:0:0 - 1)
+	case 39: // STATE 11 - sec_env.pml:62 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
 		reached[1][11] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 
 		 /* PROC cabin_door */
-	case 34: // STATE 1 - sec_env.pml:42 - [update_cabin_door?1] (0:0:0 - 1)
+	case 40: // STATE 1 - sec_env.pml:42 - [update_cabin_door?1] (0:0:0 - 1)
 		reached[0][1] = 1;
 		if (q_zero(now.update_cabin_door))
 		{	if (boq != now.update_cabin_door) continue;
@@ -741,7 +894,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 35: // STATE 2 - sec_env.pml:43 - [floor_door_is_open[current_floor] = 1] (0:0:1 - 1)
+	case 41: // STATE 2 - sec_env.pml:43 - [floor_door_is_open[current_floor] = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][2] = 1;
 		(trpt+1)->bup.oval = ((int)floor_door_is_open[ Index(((int)now.current_floor), 4) ]);
@@ -751,7 +904,7 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 36: // STATE 3 - sec_env.pml:44 - [cabin_door_is_open = 1] (0:0:1 - 1)
+	case 42: // STATE 3 - sec_env.pml:44 - [cabin_door_is_open = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][3] = 1;
 		(trpt+1)->bup.oval = ((int)cabin_door_is_open);
@@ -761,7 +914,7 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 37: // STATE 4 - sec_env.pml:45 - [cabin_door_updated!1] (0:0:0 - 1)
+	case 43: // STATE 4 - sec_env.pml:45 - [cabin_door_updated!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[0][4] = 1;
 		if (q_full(now.cabin_door_updated))
@@ -776,7 +929,7 @@
 		qsend(now.cabin_door_updated, 0, 1, 1);
 		if (q_zero(now.cabin_door_updated)) { boq = now.cabin_door_updated; };
 		_m = 2; goto P999; /* 0 */
-	case 38: // STATE 5 - sec_env.pml:46 - [update_cabin_door?0] (0:0:0 - 1)
+	case 44: // STATE 5 - sec_env.pml:46 - [update_cabin_door?0] (0:0:0 - 1)
 		reached[0][5] = 1;
 		if (q_zero(now.update_cabin_door))
 		{	if (boq != now.update_cabin_door) continue;
@@ -825,7 +978,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 39: // STATE 6 - sec_env.pml:47 - [cabin_door_is_open = 0] (0:0:1 - 1)
+	case 45: // STATE 6 - sec_env.pml:47 - [cabin_door_is_open = 0] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][6] = 1;
 		(trpt+1)->bup.oval = ((int)cabin_door_is_open);
@@ -835,7 +988,7 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 40: // STATE 7 - sec_env.pml:48 - [floor_door_is_open[current_floor] = 0] (0:0:1 - 1)
+	case 46: // STATE 7 - sec_env.pml:48 - [floor_door_is_open[current_floor] = 0] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][7] = 1;
 		(trpt+1)->bup.oval = ((int)floor_door_is_open[ Index(((int)now.current_floor), 4) ]);
@@ -845,7 +998,7 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 41: // STATE 8 - sec_env.pml:49 - [cabin_door_updated!0] (0:0:0 - 1)
+	case 47: // STATE 8 - sec_env.pml:49 - [cabin_door_updated!0] (0:0:0 - 1)
 		IfNotBlocked
 		reached[0][8] = 1;
 		if (q_full(now.cabin_door_updated))
@@ -860,7 +1013,7 @@
 		qsend(now.cabin_door_updated, 0, 0, 1);
 		if (q_zero(now.cabin_door_updated)) { boq = now.cabin_door_updated; };
 		_m = 2; goto P999; /* 0 */
-	case 42: // STATE 12 - sec_env.pml:51 - [-end-] (0:0:0 - 1)
+	case 48: // STATE 12 - sec_env.pml:51 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
 		reached[0][12] = 1;
 		if (!delproc(1, II)) continue;

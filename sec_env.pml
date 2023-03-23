@@ -89,7 +89,7 @@ active proctype main_control() {
 						floor_request_made[dest] = false;
 						served!true;
 					fi;
-				break;
+					break;
 				:: else -> skip;
 				fi;
 
@@ -112,7 +112,7 @@ active proctype main_control() {
 						floor_request_made[dest] = false;
 						served!true;
 					fi;
-				break;
+					break;
 				:: else -> skip;
 				fi;
 			od;

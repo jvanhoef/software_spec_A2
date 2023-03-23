@@ -133,19 +133,19 @@ typedef struct S_F_MAP {
 } S_F_MAP;
 
 #define _nstates4	9	/* req_button */
-#define minseq4	67
-#define maxseq4	74
+#define minseq4	84
+#define maxseq4	91
 #define _endstate4	8
 
 #define _nstates3	8	/* req_handler */
-#define minseq3	60
-#define maxseq3	66
+#define minseq3	77
+#define maxseq3	83
 #define _endstate3	7
 
-#define _nstates2	38	/* main_control */
+#define _nstates2	55	/* main_control */
 #define minseq2	23
-#define maxseq2	59
-#define _endstate2	37
+#define maxseq2	76
+#define _endstate2	54
 
 #define _nstates1	12	/* elevator_engine */
 #define minseq1	12
@@ -169,8 +169,8 @@ extern S_F_MAP src_file1[];
 extern S_F_MAP src_file0[];
 
 #define T_ID	unsigned char
-#define _T5	43
-#define _T2	44
+#define _T5	49
+#define _T2	50
 #define WS		8 /* word size in bytes */
 #define SYNC	6
 #define ASYNC	1
@@ -484,7 +484,7 @@ typedef struct TRIX_v6 {
 #define _start5	0 /* np_ */
 #define _start4	5
 #define _start3	4
-#define _start2	34
+#define _start2	51
 #define _start1	8
 #define _start0	9
 #ifdef NP
@@ -895,7 +895,7 @@ void qsend(int, int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	45
+#define NTRANS	51
 #if defined(BFS_PAR) || NCORE>1
 	void e_critical(int);
 	void x_critical(int);
