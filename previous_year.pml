@@ -255,9 +255,6 @@ proctype main_control() {
 				observed_low[lockid]?true;
 				change_doors_pos[lockid]!low;
 				doors_pos_changed[lockid]?true;
-			:: else -> skip;
-			fi;
-			if
 			:: request_high[lockid]?true ->
 				if
 				:: lock_water_level[lockid] != high_level -> change_slide_pos[lockid]!high; 
