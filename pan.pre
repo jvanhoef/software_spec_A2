@@ -1,0 +1,140 @@
+# 1 "sec_env.pml"
+# 1 "<built-in>"
+# 1 "<command-line>"
+# 31 "<command-line>"
+# 1 "/usr/include/stdc-predef.h" 1 3 4
+# 32 "<command-line>" 2
+# 1 "sec_env.pml"
+# 17 "sec_env.pml"
+mtype { down, up, none };
+
+
+chan request = [4] of { byte };
+
+bool floor_request_made[4];
+
+
+bool floor_door_is_open[4];
+
+
+byte current_floor;
+bool cabin_door_is_open;
+chan update_cabin_door = [0] of { bool };
+chan cabin_door_updated = [0] of { bool };
+chan move = [0] of { bool };
+chan floor_reached = [0] of { bool };
+
+
+chan go = [0] of { byte };
+chan served = [0] of { bool };
+
+
+active proctype cabin_door() {
+ do
+ :: update_cabin_door?true ->
+  floor_door_is_open[current_floor] = true;
+  cabin_door_is_open = true;
+  cabin_door_updated!true;
+ :: update_cabin_door?false ->
+  cabin_door_is_open = false;
+  floor_door_is_open[current_floor] = false;
+  cabin_door_updated!false;
+ od;
+}
+
+
+active proctype elevator_engine() {
+ do
+ :: move?true ->
+  do
+  :: move?false -> break;
+  :: floor_reached!true;
+  od;
+ od;
+}
+
+
+active proctype main_control() {
+ byte dest;
+ do
+
+ :: go?dest ->
+   move!true;
+
+  if
+  ::dest > current_floor ->
+   do
+
+   ::floor_reached?true ->
+    current_floor++;
+
+    if
+    :: current_floor == dest ->
+     move!false;
+     update_cabin_door!true;
+     if
+     :: cabin_door_updated?true ->
+      update_cabin_door!false;
+     fi;
+     if
+     ::cabin_door_updated?false ->
+      floor_request_made[dest] = false;
+      served!true;
+     fi;
+    break;
+    :: else -> skip;
+    fi;
+
+   od;
+  ::dest < current_floor ->
+   do
+   ::floor_reached?true ->
+    current_floor--;
+
+    if
+    :: current_floor == dest ->
+     move!false;
+     update_cabin_door!true;
+     if
+     :: cabin_door_updated?true ->
+      update_cabin_door!false;
+     fi;
+     if
+     ::cabin_door_updated?false ->
+      floor_request_made[dest] = false;
+      served!true;
+     fi;
+    break;
+    :: else -> skip;
+    fi;
+   od;
+   fi;
+
+
+
+
+
+
+ od;
+}
+
+
+active proctype req_handler() {
+ byte dest;
+ do
+ :: request?dest ->
+  go!dest;
+  served?true;
+ od;
+}
+
+
+active [4] proctype req_button() {
+ do
+ :: !floor_request_made[_pid-4] ->
+    atomic {
+  request!_pid-4;
+  floor_request_made[_pid-4] = true;
+    }
+ od;
+}

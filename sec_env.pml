@@ -70,7 +70,7 @@ active proctype main_control() {
 	 	move!true;
 		//checks if destination is above or below current floor
 		if
-		::dest < current_floor ->
+		::dest > current_floor ->
 			do
 			//loops and increases floor every time a new floor is detected by the sensors
 			::floor_reached?true ->
@@ -79,11 +79,22 @@ active proctype main_control() {
 				if
 				:: current_floor == dest ->
 					move!false;
-					break;
+					update_cabin_door!true;
+					if
+					:: cabin_door_updated?true ->
+						update_cabin_door!false;
+					fi;
+					if
+					::cabin_door_updated?false ->
+						floor_request_made[dest] = false;
+						served!true;
+					fi;
+				break;
+				:: else -> skip;
 				fi;
 
 			od;
-		::dest > current_floor ->
+		::dest < current_floor ->
 			do
 			::floor_reached?true ->
 				current_floor--;
@@ -91,20 +102,26 @@ active proctype main_control() {
 				if
 				:: current_floor == dest ->
 					move!false;
-					break;
+					update_cabin_door!true;
+					if
+					:: cabin_door_updated?true ->
+						update_cabin_door!false;
+					fi;
+					if
+					::cabin_door_updated?false ->
+						floor_request_made[dest] = false;
+						served!true;
+					fi;
+				break;
+				:: else -> skip;
 				fi;
 			od;
-		fi;
-		:: update_cabin_door!true;
-		:: update_cabin_door!false;
-		
+		 fi;
 
 
 	   // an example assertion.
 	   //assert(0 <= current_floor && current_floor < N);
 
-	   floor_request_made[dest] = false;
-	   served!true;
 
 	od;
 }
