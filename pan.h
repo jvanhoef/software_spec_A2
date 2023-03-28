@@ -133,19 +133,19 @@ typedef struct S_F_MAP {
 } S_F_MAP;
 
 #define _nstates4	9	/* req_button */
-#define minseq4	84
-#define maxseq4	91
+#define minseq4	64
+#define maxseq4	71
 #define _endstate4	8
 
 #define _nstates3	8	/* req_handler */
-#define minseq3	77
-#define maxseq3	83
+#define minseq3	57
+#define maxseq3	63
 #define _endstate3	7
 
-#define _nstates2	55	/* main_control */
+#define _nstates2	35	/* main_control */
 #define minseq2	23
-#define maxseq2	76
-#define _endstate2	54
+#define maxseq2	56
+#define _endstate2	34
 
 #define _nstates1	12	/* elevator_engine */
 #define minseq1	12
@@ -169,8 +169,8 @@ extern S_F_MAP src_file1[];
 extern S_F_MAP src_file0[];
 
 #define T_ID	unsigned char
-#define _T5	49
-#define _T2	50
+#define _T5	43
+#define _T2	44
 #define WS		8 /* word size in bytes */
 #define SYNC	6
 #define ASYNC	1
@@ -216,6 +216,8 @@ typedef struct P2 { /* main_control */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
+	unsigned going_up : 1;
+	unsigned going_down : 1;
 	uchar dest;
 } P2;
 #define Air2	(sizeof(P2) - Offsetof(P2, dest) - 1*sizeof(uchar))
@@ -484,7 +486,7 @@ typedef struct TRIX_v6 {
 #define _start5	0 /* np_ */
 #define _start4	5
 #define _start3	4
-#define _start2	51
+#define _start2	31
 #define _start1	8
 #define _start0	9
 #ifdef NP
@@ -895,7 +897,7 @@ void qsend(int, int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	51
+#define NTRANS	45
 #if defined(BFS_PAR) || NCORE>1
 	void e_critical(int);
 	void x_critical(int);

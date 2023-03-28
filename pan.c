@@ -499,8 +499,8 @@ int _;	/* predefined write-only variable */
 #endif
 
 short src_ln4 [] = {
-	  0, 142, 144, 145, 143, 141, 148, 141, 
-	148,   0, };
+	  0, 119, 121, 122, 120, 118, 125, 118, 
+	125,   0, };
 S_F_MAP src_file4 [] = {
 	{ "-", 0, 0 },
 	{ "sec_env.pml", 1, 8 },
@@ -512,7 +512,7 @@ uchar reached4 [] = {
 uchar *loopstate4;
 
 short src_ln3 [] = {
-	  0, 133, 134, 135, 132, 137, 132, 137, 
+	  0, 110, 111, 112, 109, 114, 109, 114, 
 	  0, };
 S_F_MAP src_file3 [] = {
 	{ "-", 0, 0 },
@@ -525,26 +525,22 @@ uchar reached3 [] = {
 uchar *loopstate3;
 
 short src_ln2 [] = {
-	  0,  69,  70,  73,  76,  77,  80,  81, 
-	 82,  84,  85,  83,  87,  88,  89,  90, 
-	 87,  92,  92,  93,  93,  79,  96,  74, 
-	 97,  74,  97,  99, 100, 103, 104, 105, 
-	107, 108, 106, 110, 111, 112, 113, 110, 
-	115, 115, 116, 116, 102, 118,  98, 119, 
-	 98,  72, 126,  67, 127,  67, 127,   0, };
+	  0,  68,  69,  73,  76,  77,  79,  80, 
+	 81,  83,  84,  82,  86,  87,  88,  89, 
+	 86,  91,  91,  92,  93,  94,  95,  96, 
+	 98,  99,  78, 101,  76, 103,  76,  67, 
+	104,  67, 104,   0, };
 S_F_MAP src_file2 [] = {
 	{ "-", 0, 0 },
-	{ "sec_env.pml", 1, 54 },
-	{ "-", 55, 56 }
+	{ "sec_env.pml", 1, 34 },
+	{ "-", 35, 36 }
 };
 uchar reached2 [] = {
-	  0,   1,   0,   1,   1,   0,   1,   0, 
+	  0,   1,   0,   0,   0,   1,   1,   0, 
 	  0,   1,   0,   0,   1,   1,   0,   0, 
-	  0,   1,   1,   1,   1,   0,   1,   0, 
-	  1,   1,   1,   1,   0,   1,   0,   0, 
-	  1,   0,   0,   1,   1,   0,   0,   0, 
-	  1,   1,   1,   1,   0,   1,   0,   1, 
-	  1,   0,   1,   0,   1,   1,   0,   0, };
+	  0,   1,   1,   1,   0,   1,   0,   1, 
+	  0,   1,   0,   1,   0,   1,   1,   0, 
+	  1,   1,   0,   0, };
 uchar *loopstate2;
 
 short src_ln1 [] = {
@@ -925,15 +921,17 @@ addproc(int calling_pid, int priority, int n)
 		break;
 	case 2:	/* main_control */
 		((P2 *)pptr(h))->_t = 2;
-		((P2 *)pptr(h))->_p = 51;
+		((P2 *)pptr(h))->_p = 31;
 #ifdef HAS_PRIORITY
 		((P2 *)pptr(h))->_priority = priority; /* was: 1 */
 #endif
-		reached2[51]=1;
+		reached2[31]=1;
 		/* params: */
 		/* locals: */
 		((P2 *)pptr(h))->dest = 0;
 #ifdef VAR_RANGES
+		logval("main_control:going_up", ((P2 *)pptr(h))->going_up);
+		logval("main_control:going_down", ((P2 *)pptr(h))->going_down);
 		logval("main_control:dest", ((P2 *)pptr(h))->dest);
 #endif
 #ifdef HAS_CODE
@@ -14623,6 +14621,8 @@ c_locals(int pid, int tp)
 	case 2:
 		printf("local vars proc %d (main_control):\n", pid);
 	printf("	byte   dest:	%d\n", ((P2 *)pptr(pid))->dest);
+	printf("	bit    going_up:	%d\n", ((P2 *)pptr(pid))->going_up);
+	printf("	bit    going_down:	%d\n", ((P2 *)pptr(pid))->going_down);
 		break;
 	case 1:
 		/* none */
@@ -14707,7 +14707,7 @@ c_chandump(int from)
 	printf("\n");
 }
 
-Trans *t_id_lkup[92];
+Trans *t_id_lkup[72];
 
 
 #ifdef BFS_PAR

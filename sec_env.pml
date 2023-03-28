@@ -63,67 +63,44 @@ active proctype elevator_engine() {
 
 // DUMMY main control process. Remodel it to control the doors and the engine!
 active proctype main_control() {
-	byte dest;
-	do
-	//receives the floor id from go and sets move to true
-	:: go?dest ->
-	 	move!true;
-		//checks if destination is above or below current floor
-		if
-		::dest > current_floor ->
-			do
-			//loops and increases floor every time a new floor is detected by the sensors
-			::floor_reached?true ->
-				current_floor++;
-				//PROBLEM should check when current floor is correct, and break out of the previous do loop
-				if
-				:: current_floor == dest ->
-					move!false;
-					update_cabin_door!true;
-					if
-					:: cabin_door_updated?true ->
-						update_cabin_door!false;
-					fi;
-					if
-					::cabin_door_updated?false ->
-						floor_request_made[dest] = false;
-						served!true;
-					fi;
-					break;
-				:: else -> skip;
-				fi;
+    byte dest;
+    do
+    :: go?dest ->
+        move!true;
 
-			od;
-		::dest < current_floor ->
-			do
-			::floor_reached?true ->
-				current_floor--;
-				//PROBLEM should check when current floor is correct, and break out of the previous do loop
-				if
-				:: current_floor == dest ->
-					move!false;
-					update_cabin_door!true;
-					if
-					:: cabin_door_updated?true ->
-						update_cabin_door!false;
-					fi;
-					if
-					::cabin_door_updated?false ->
-						floor_request_made[dest] = false;
-						served!true;
-					fi;
-					break;
-				:: else -> skip;
-				fi;
-			od;
-		 fi;
+        // determine direction of travel
+        bool going_up = (dest > current_floor);
+        bool going_down = (dest < current_floor);
 
+        // move in the direction of the destination floor
+        do
+        :: floor_reached?true ->
+            if
+            :: current_floor == dest ->
+                move!false;
+                update_cabin_door!true;
+                if
+                :: cabin_door_updated?true ->
+                    update_cabin_door!false;
+                fi;
+                if
+                :: cabin_door_updated?false ->
+                    floor_request_made[dest] = false;
+                    served!true;
+                fi;
+                break;
+            :: going_up ->
+                current_floor++;
+            :: going_down ->
+                current_floor--;
+            :: else ->
+                // stop moving if direction is none
+                move!false;
+                break;
+            fi;
+        od;
 
-	   // an example assertion.
-	   //assert(0 <= current_floor && current_floor < N);
-
-
-	od;
+    od;
 }
 
 // request handler process. Remodel this process to serve M elevators!
