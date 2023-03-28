@@ -7,14 +7,14 @@
 //ltl p1 { []<> (floor_request_made[1]==true) } /* this property does not hold, as a request for floor 1 can be indefinitely postponed. */
 //ltl p2 { []<> (cabin_door_is_open==true) } /* this property should hold, but does not yet; at any moment during an execution, the opening of the cabin door will happen at some later point. */
 
- ltl p1 { []<> (floor_request_made[0] -> current_floor == 0 ) }; // holds
+// ltl p1 { []<> (floor_request_made[0] -> current_floor == 0 ) }; // holds
 // ltl p2 { []<> (floor_request_made[2] -> current_floor == 2) }; // holds
 // ltl p3 { []<>cabin_door_is_open}; // doesnt hold
 // ltl p4 { []<>!cabin_door_is_open	};	// holds
 
 
 // the number of floors
-#define N	2
+#define N	255
 
 // IDs of req_button processes
 #define reqid _pid-4
@@ -67,10 +67,6 @@ active proctype main_control() {
 	:: go?dest ->
 		move!true;
 
-		// determine direction of travel
-		bool going_up = (dest > current_floor);
-		bool going_down = (dest < current_floor);
-
 		// move in the direction of the destination floor
 		do
 		:: floor_reached?true ->
@@ -88,9 +84,9 @@ active proctype main_control() {
 											served!true;
 							fi;
 							break;
-			:: going_up ->
+			:: dest > current_floor ->
 							current_floor++;
-			:: going_down ->
+			:: dest < current_floor ->
 							current_floor--;
 			:: else ->
 							// stop moving if direction is none
