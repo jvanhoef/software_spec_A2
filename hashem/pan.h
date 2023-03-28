@@ -139,7 +139,7 @@ typedef struct S_F_MAP {
 	int upto;
 } S_F_MAP;
 
-#define _nstates5	14	/* p3 */
+#define _nstates5	14	/* p1 */
 #define minseq5	72
 #define maxseq5	84
 #define _endstate5	13
@@ -199,7 +199,7 @@ extern S_F_MAP src_file0[];
 	#endif
 #endif
 
-typedef struct P5 { /* p3 */
+typedef struct P5 { /* p1 */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 7; /* state    */
@@ -469,7 +469,6 @@ typedef struct State {
 	#endif
 #endif
 	uchar floor_request_made[2];
-	unsigned cabin_door_is_open : 1;
 	uchar current_floor;
 	uchar request;
 	uchar update_cabin_door;
@@ -500,6 +499,7 @@ typedef struct TRIX_v6 {
 
 #define HAS_TRACK	0
 /* hidden variable: */	uchar floor_door_is_open[2];
+/* hidden variable: */	uchar cabin_door_is_open;
 #define FORWARD_MOVES	"pan.m"
 #define BACKWARD_MOVES	"pan.b"
 #define TRANSITIONS	"pan.t"

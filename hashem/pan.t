@@ -24,7 +24,7 @@ settable(void)
 
 	trans = (Trans ***) emalloc(7*sizeof(Trans **));
 
-	/* proctype 5: p3 */
+	/* proctype 5: p1 */
 
 	trans[5] = (Trans **) emalloc(14*sizeof(Trans *));
 
@@ -32,7 +32,7 @@ settable(void)
 	T = trans[5][5] = settr(76,0,0,0,0,"DO", 0, 2, 0);
 	T = T->nxt	= settr(76,0,1,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(76,0,3,0,0,"DO", 0, 2, 0);
-	trans[5][1]	= settr(72,0,10,3,0,"(!(cabin_door_is_open))", 1, 2, 0);
+	trans[5][1]	= settr(72,0,10,3,0,"(!((!(floor_request_made[0])||(current_floor==0))))", 1, 2, 0);
 	trans[5][2]	= settr(73,0,10,1,0,"goto accept_S4", 0, 2, 0);
 	trans[5][3]	= settr(74,0,5,1,0,"(1)", 0, 2, 0);
 	trans[5][4]	= settr(75,0,5,1,0,"goto T0_init", 0, 2, 0);
@@ -40,7 +40,7 @@ settable(void)
 	trans[5][11]	= settr(82,0,10,1,0,".(goto)", 0, 2, 0);
 	T = trans[5][10] = settr(81,0,0,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(81,0,8,0,0,"DO", 0, 2, 0);
-	trans[5][8]	= settr(79,0,10,4,0,"(!(cabin_door_is_open))", 1, 2, 0);
+	trans[5][8]	= settr(79,0,10,4,0,"(!((!(floor_request_made[0])||(current_floor==0))))", 1, 2, 0);
 	trans[5][9]	= settr(80,0,10,1,0,"goto accept_S4", 0, 2, 0);
 	trans[5][12]	= settr(83,0,13,1,0,"break", 0, 2, 0);
 	trans[5][13]	= settr(84,0,0,5,5,"-end-", 0, 3500, 0);

@@ -1,11 +1,11 @@
-never p2 {    /* !([] (<> ((cabin_door_is_open==1)))) */
+never p3 {    /* !([] (<> (cabin_door_is_open))) */
 T0_init:
 	do
-	:: (! (((cabin_door_is_open==1)))) -> goto accept_S4
+	:: (! ((cabin_door_is_open))) -> goto accept_S4
 	:: (1) -> goto T0_init
 	od;
 accept_S4:
 	do
-	:: (! (((cabin_door_is_open==1)))) -> goto accept_S4
+	:: (! ((cabin_door_is_open))) -> goto accept_S4
 	od;
 }

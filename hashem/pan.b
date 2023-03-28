@@ -2,7 +2,7 @@
 	default: Uerror("bad return move");
 	case  0: goto R999; /* nothing to undo */
 
-		 /* CLAIM p3 */
+		 /* CLAIM p1 */
 ;
 		;
 		;
@@ -233,7 +233,7 @@
 
 	case 39: // STATE 3
 		;
-		now.cabin_door_is_open = trpt->bup.oval;
+		cabin_door_is_open = trpt->bup.oval;
 		;
 		goto R999;
 
@@ -253,7 +253,7 @@
 
 	case 42: // STATE 6
 		;
-		now.cabin_door_is_open = trpt->bup.oval;
+		cabin_door_is_open = trpt->bup.oval;
 		;
 		goto R999;
 

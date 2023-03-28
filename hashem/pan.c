@@ -621,7 +621,7 @@ char *procname[] = {
    "main_control",
    "req_handler",
    "req_button",
-   "p3",
+   "p1",
    ":np_:",
 	0
 };
@@ -634,7 +634,7 @@ int Btypes[] = {
    3,	/* main_control */
    3,	/* req_handler */
    3,	/* req_button */
-   1,	/* p3 */
+   1,	/* p1 */
    0	/* :np_: */
 };
 
@@ -910,7 +910,7 @@ addproc(int calling_pid, int priority, int n)
 		reached6[0] = 1;
 		accpstate[6][1] = 1;
 		break;
-	case 5:	/* p3 */
+	case 5:	/* p1 */
 		((P5 *)pptr(h))->_t = 5;
 		((P5 *)pptr(h))->_p = 5;
 #ifdef HAS_PRIORITY
@@ -12569,7 +12569,7 @@ iniglobals(int calling_pid)
 			floor_door_is_open[l_in] = 0;
 		}
 	}
-		now.cabin_door_is_open = 0;
+		cabin_door_is_open = 0;
 		now.current_floor = 0;
 		now.request = addqueue(calling_pid, 1, 0);
 		now.update_cabin_door = addqueue(calling_pid, 2, 1);
@@ -12585,7 +12585,6 @@ iniglobals(int calling_pid)
 			logval("floor_request_made[l_in]", now.floor_request_made[l_in]);
 		}
 	}
-		logval("cabin_door_is_open", now.cabin_door_is_open);
 		logval("current_floor", now.current_floor);
 #endif
 }
@@ -14645,7 +14644,6 @@ c_globals(void)
 		}
 	}
 	printf("	byte   current_floor:	%d\n", now.current_floor);
-	printf("	bit    cabin_door_is_open:	%d\n", now.cabin_door_is_open);
 	printf("	chan update_cabin_door (=%d):	len %d:\t", now.update_cabin_door, q_len(now.update_cabin_door));
 	c_chandump(now.update_cabin_door);
 	printf("	chan cabin_door_updated (=%d):	len %d:\t", now.cabin_door_updated, q_len(now.cabin_door_updated));

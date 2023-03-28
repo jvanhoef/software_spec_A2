@@ -19,8 +19,8 @@
 		if (trpt->o_pm&1) continue;
 		_m = 3; goto P999;
 
-		 /* CLAIM p3 */
-	case 3: // STATE 1 - _spin_nvr.tmp:3 - [(!(cabin_door_is_open))] (0:0:0 - 1)
+		 /* CLAIM p1 */
+	case 3: // STATE 1 - _spin_nvr.tmp:3 - [(!((!(floor_request_made[0])||(current_floor==0))))] (0:0:0 - 1)
 		
 #if defined(VERI) && !defined(NP)
 #if NCLAIMS>1
@@ -43,10 +43,10 @@
 #endif
 #endif
 		reached[5][1] = 1;
-		if (!( !(((int)now.cabin_door_is_open))))
+		if (!( !(( !(((int)now.floor_request_made[0]))||(((int)now.current_floor)==0)))))
 			continue;
 		_m = 3; goto P999; /* 0 */
-	case 4: // STATE 8 - _spin_nvr.tmp:8 - [(!(cabin_door_is_open))] (0:0:0 - 1)
+	case 4: // STATE 8 - _spin_nvr.tmp:8 - [(!((!(floor_request_made[0])||(current_floor==0))))] (0:0:0 - 1)
 		
 #if defined(VERI) && !defined(NP)
 #if NCLAIMS>1
@@ -69,7 +69,7 @@
 #endif
 #endif
 		reached[5][8] = 1;
-		if (!( !(((int)now.cabin_door_is_open))))
+		if (!( !(( !(((int)now.floor_request_made[0]))||(((int)now.current_floor)==0)))))
 			continue;
 		_m = 3; goto P999; /* 0 */
 	case 5: // STATE 13 - _spin_nvr.tmp:10 - [-end-] (0:0:0 - 1)
@@ -798,10 +798,10 @@
 	case 39: // STATE 3 - test.pml:48 - [cabin_door_is_open = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][3] = 1;
-		(trpt+1)->bup.oval = ((int)now.cabin_door_is_open);
-		now.cabin_door_is_open = 1;
+		(trpt+1)->bup.oval = ((int)cabin_door_is_open);
+		cabin_door_is_open = 1;
 #ifdef VAR_RANGES
-		logval("cabin_door_is_open", ((int)now.cabin_door_is_open));
+		logval("cabin_door_is_open", ((int)cabin_door_is_open));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
@@ -872,10 +872,10 @@
 	case 42: // STATE 6 - test.pml:49 - [cabin_door_is_open = 0] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][6] = 1;
-		(trpt+1)->bup.oval = ((int)now.cabin_door_is_open);
-		now.cabin_door_is_open = 0;
+		(trpt+1)->bup.oval = ((int)cabin_door_is_open);
+		cabin_door_is_open = 0;
 #ifdef VAR_RANGES
-		logval("cabin_door_is_open", ((int)now.cabin_door_is_open));
+		logval("cabin_door_is_open", ((int)cabin_door_is_open));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */

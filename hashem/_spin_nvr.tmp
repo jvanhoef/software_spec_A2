@@ -1,0 +1,11 @@
+never p1 {    /* !([] (<> ((! (floor_request_made[0])) || ((current_floor==0))))) */
+T0_init:
+	do
+	:: (! (((! (floor_request_made[0])) || ((current_floor==0))))) -> goto accept_S4
+	:: (1) -> goto T0_init
+	od;
+accept_S4:
+	do
+	:: (! (((! (floor_request_made[0])) || ((current_floor==0))))) -> goto accept_S4
+	od;
+}
