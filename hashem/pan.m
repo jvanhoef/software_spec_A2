@@ -19,93 +19,14 @@
 		if (trpt->o_pm&1) continue;
 		_m = 3; goto P999;
 
-		 /* CLAIM p1 */
-	case 3: // STATE 1 - _spin_nvr.tmp:3 - [(!((!(floor_request_made[0])||(current_floor==0))))] (0:0:0 - 1)
-		
-#if defined(VERI) && !defined(NP)
-#if NCLAIMS>1
-		{	static int reported1 = 0;
-			if (verbose && !reported1)
-			{	int nn = (int) ((Pclaim *)pptr(0))->_n;
-				printf("depth %ld: Claim %s (%d), state %d (line %d)\n",
-					depth, procname[spin_c_typ[nn]], nn, (int) ((Pclaim *)pptr(0))->_p, src_claim[ (int) ((Pclaim *)pptr(0))->_p ]);
-				reported1 = 1;
-				fflush(stdout);
-		}	}
-#else
-		{	static int reported1 = 0;
-			if (verbose && !reported1)
-			{	printf("depth %d: Claim, state %d (line %d)\n",
-					(int) depth, (int) ((Pclaim *)pptr(0))->_p, src_claim[ (int) ((Pclaim *)pptr(0))->_p ]);
-				reported1 = 1;
-				fflush(stdout);
-		}	}
-#endif
-#endif
-		reached[5][1] = 1;
-		if (!( !(( !(((int)now.floor_request_made[0]))||(((int)now.current_floor)==0)))))
-			continue;
-		_m = 3; goto P999; /* 0 */
-	case 4: // STATE 8 - _spin_nvr.tmp:8 - [(!((!(floor_request_made[0])||(current_floor==0))))] (0:0:0 - 1)
-		
-#if defined(VERI) && !defined(NP)
-#if NCLAIMS>1
-		{	static int reported8 = 0;
-			if (verbose && !reported8)
-			{	int nn = (int) ((Pclaim *)pptr(0))->_n;
-				printf("depth %ld: Claim %s (%d), state %d (line %d)\n",
-					depth, procname[spin_c_typ[nn]], nn, (int) ((Pclaim *)pptr(0))->_p, src_claim[ (int) ((Pclaim *)pptr(0))->_p ]);
-				reported8 = 1;
-				fflush(stdout);
-		}	}
-#else
-		{	static int reported8 = 0;
-			if (verbose && !reported8)
-			{	printf("depth %d: Claim, state %d (line %d)\n",
-					(int) depth, (int) ((Pclaim *)pptr(0))->_p, src_claim[ (int) ((Pclaim *)pptr(0))->_p ]);
-				reported8 = 1;
-				fflush(stdout);
-		}	}
-#endif
-#endif
-		reached[5][8] = 1;
-		if (!( !(( !(((int)now.floor_request_made[0]))||(((int)now.current_floor)==0)))))
-			continue;
-		_m = 3; goto P999; /* 0 */
-	case 5: // STATE 13 - _spin_nvr.tmp:10 - [-end-] (0:0:0 - 1)
-		
-#if defined(VERI) && !defined(NP)
-#if NCLAIMS>1
-		{	static int reported13 = 0;
-			if (verbose && !reported13)
-			{	int nn = (int) ((Pclaim *)pptr(0))->_n;
-				printf("depth %ld: Claim %s (%d), state %d (line %d)\n",
-					depth, procname[spin_c_typ[nn]], nn, (int) ((Pclaim *)pptr(0))->_p, src_claim[ (int) ((Pclaim *)pptr(0))->_p ]);
-				reported13 = 1;
-				fflush(stdout);
-		}	}
-#else
-		{	static int reported13 = 0;
-			if (verbose && !reported13)
-			{	printf("depth %d: Claim, state %d (line %d)\n",
-					(int) depth, (int) ((Pclaim *)pptr(0))->_p, src_claim[ (int) ((Pclaim *)pptr(0))->_p ]);
-				reported13 = 1;
-				fflush(stdout);
-		}	}
-#endif
-#endif
-		reached[5][13] = 1;
-		if (!delproc(1, II)) continue;
-		_m = 3; goto P999; /* 0 */
-
 		 /* PROC req_button */
-	case 6: // STATE 1 - test.pml:116 - [(!(floor_request_made[(_pid-4)]))] (0:0:0 - 1)
+	case 3: // STATE 1 - test.pml:113 - [(!(floor_request_made[(_pid-4)]))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[4][1] = 1;
-		if (!( !(((int)now.floor_request_made[ Index((((int)((P4 *)_this)->_pid)-4), 2) ]))))
+		if (!( !(((int)now.floor_request_made[ Index((((int)((P4 *)_this)->_pid)-4), 255) ]))))
 			continue;
 		_m = 3; goto P999; /* 0 */
-	case 7: // STATE 2 - test.pml:118 - [request!(_pid-4)] (0:0:0 - 1)
+	case 4: // STATE 2 - test.pml:115 - [request!(_pid-4)] (0:0:0 - 1)
 		IfNotBlocked
 		reached[4][2] = 1;
 		if (q_full(now.request))
@@ -120,24 +41,24 @@
 		qsend(now.request, 0, (((int)((P4 *)_this)->_pid)-4), 1);
 		if (q_zero(now.request)) { boq = now.request; };
 		_m = 2; goto P999; /* 0 */
-	case 8: // STATE 3 - test.pml:119 - [floor_request_made[(_pid-4)] = 1] (0:0:1 - 1)
+	case 5: // STATE 3 - test.pml:116 - [floor_request_made[(_pid-4)] = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[4][3] = 1;
-		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index((((int)((P4 *)_this)->_pid)-4), 2) ]);
-		now.floor_request_made[ Index((((P4 *)_this)->_pid-4), 2) ] = 1;
+		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index((((int)((P4 *)_this)->_pid)-4), 255) ]);
+		now.floor_request_made[ Index((((P4 *)_this)->_pid-4), 255) ] = 1;
 #ifdef VAR_RANGES
-		logval("floor_request_made[(_pid-4)]", ((int)now.floor_request_made[ Index((((int)((P4 *)_this)->_pid)-4), 2) ]));
+		logval("floor_request_made[(_pid-4)]", ((int)now.floor_request_made[ Index((((int)((P4 *)_this)->_pid)-4), 255) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 9: // STATE 8 - test.pml:122 - [-end-] (0:0:0 - 1)
+	case 6: // STATE 8 - test.pml:119 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
 		reached[4][8] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 
 		 /* PROC req_handler */
-	case 10: // STATE 1 - test.pml:109 - [request?dest] (0:0:1 - 1)
+	case 7: // STATE 1 - test.pml:106 - [request?dest] (0:0:1 - 1)
 		reached[3][1] = 1;
 		if (q_zero(now.request))
 		{	if (boq != now.request) continue;
@@ -185,7 +106,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 11: // STATE 2 - test.pml:109 - [go!dest] (0:0:0 - 1)
+	case 8: // STATE 2 - test.pml:106 - [go!dest] (0:0:0 - 1)
 		IfNotBlocked
 		reached[3][2] = 1;
 		if (q_full(now.go))
@@ -200,7 +121,7 @@
 		qsend(now.go, 0, ((int)((P3 *)_this)->dest), 1);
 		if (q_zero(now.go)) { boq = now.go; };
 		_m = 2; goto P999; /* 0 */
-	case 12: // STATE 3 - test.pml:109 - [served?1] (0:0:0 - 1)
+	case 9: // STATE 3 - test.pml:106 - [served?1] (0:0:0 - 1)
 		reached[3][3] = 1;
 		if (q_zero(now.served))
 		{	if (boq != now.served) continue;
@@ -249,14 +170,14 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 13: // STATE 7 - test.pml:111 - [-end-] (0:0:0 - 1)
+	case 10: // STATE 7 - test.pml:108 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
 		reached[3][7] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 
 		 /* PROC main_control */
-	case 14: // STATE 1 - test.pml:67 - [go?dest] (0:0:1 - 1)
+	case 11: // STATE 1 - test.pml:67 - [go?dest] (0:0:1 - 1)
 		reached[2][1] = 1;
 		if (q_zero(now.go))
 		{	if (boq != now.go) continue;
@@ -304,7 +225,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 15: // STATE 2 - test.pml:68 - [move!1] (0:0:0 - 1)
+	case 12: // STATE 2 - test.pml:68 - [move!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][2] = 1;
 		if (q_full(now.move))
@@ -319,28 +240,8 @@
 		qsend(now.move, 0, 1, 1);
 		if (q_zero(now.move)) { boq = now.move; };
 		_m = 2; goto P999; /* 0 */
-	case 16: // STATE 3 - test.pml:72 - [going_up = (dest>current_floor)] (0:0:1 - 1)
-		IfNotBlocked
+	case 13: // STATE 3 - test.pml:72 - [floor_reached?1] (0:0:0 - 1)
 		reached[2][3] = 1;
-		(trpt+1)->bup.oval = ((int)((P2 *)_this)->going_up);
-		((P2 *)_this)->going_up = (((int)((P2 *)_this)->dest)>((int)now.current_floor));
-#ifdef VAR_RANGES
-		logval("main_control:going_up", ((int)((P2 *)_this)->going_up));
-#endif
-		;
-		_m = 3; goto P999; /* 0 */
-	case 17: // STATE 4 - test.pml:75 - [going_down = (dest<current_floor)] (0:0:1 - 1)
-		IfNotBlocked
-		reached[2][4] = 1;
-		(trpt+1)->bup.oval = ((int)((P2 *)_this)->going_down);
-		((P2 *)_this)->going_down = (((int)((P2 *)_this)->dest)<((int)now.current_floor));
-#ifdef VAR_RANGES
-		logval("main_control:going_down", ((int)((P2 *)_this)->going_down));
-#endif
-		;
-		_m = 3; goto P999; /* 0 */
-	case 18: // STATE 5 - test.pml:76 - [floor_reached?1] (0:0:0 - 1)
-		reached[2][5] = 1;
 		if (q_zero(now.floor_reached))
 		{	if (boq != now.floor_reached) continue;
 		} else
@@ -388,15 +289,15 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 19: // STATE 6 - test.pml:78 - [((current_floor==dest))] (0:0:0 - 1)
+	case 14: // STATE 4 - test.pml:74 - [((current_floor==dest))] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][6] = 1;
+		reached[2][4] = 1;
 		if (!((((int)now.current_floor)==((int)((P2 *)_this)->dest))))
 			continue;
 		_m = 3; goto P999; /* 0 */
-	case 20: // STATE 7 - test.pml:79 - [move!0] (0:0:0 - 1)
+	case 15: // STATE 5 - test.pml:75 - [move!0] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][7] = 1;
+		reached[2][5] = 1;
 		if (q_full(now.move))
 			continue;
 #ifdef HAS_CODE
@@ -409,9 +310,9 @@
 		qsend(now.move, 0, 0, 1);
 		if (q_zero(now.move)) { boq = now.move; };
 		_m = 2; goto P999; /* 0 */
-	case 21: // STATE 8 - test.pml:80 - [update_cabin_door!1] (0:0:0 - 1)
+	case 16: // STATE 6 - test.pml:76 - [update_cabin_door!1] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][8] = 1;
+		reached[2][6] = 1;
 		if (q_full(now.update_cabin_door))
 			continue;
 #ifdef HAS_CODE
@@ -424,8 +325,8 @@
 		qsend(now.update_cabin_door, 0, 1, 1);
 		if (q_zero(now.update_cabin_door)) { boq = now.update_cabin_door; };
 		_m = 2; goto P999; /* 0 */
-	case 22: // STATE 9 - test.pml:82 - [cabin_door_updated?1] (0:0:0 - 1)
-		reached[2][9] = 1;
+	case 17: // STATE 7 - test.pml:78 - [cabin_door_updated?1] (0:0:0 - 1)
+		reached[2][7] = 1;
 		if (q_zero(now.cabin_door_updated))
 		{	if (boq != now.cabin_door_updated) continue;
 		} else
@@ -473,9 +374,14 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 23: // STATE 10 - test.pml:83 - [update_cabin_door!0] (0:0:0 - 1)
+	case 18: // STATE 8 - test.pml:79 - [assert((cabin_door_is_open&&floor_door_is_open[current_floor]))] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][10] = 1;
+		reached[2][8] = 1;
+		spin_assert((((int)now.cabin_door_is_open)&&((int)now.floor_door_is_open[ Index(((int)now.current_floor), 255) ])), "(cabin_door_is_open&&floor_door_is_open[current_floor])", II, tt, t);
+		_m = 3; goto P999; /* 0 */
+	case 19: // STATE 9 - test.pml:80 - [update_cabin_door!0] (0:0:0 - 1)
+		IfNotBlocked
+		reached[2][9] = 1;
 		if (q_full(now.update_cabin_door))
 			continue;
 #ifdef HAS_CODE
@@ -488,8 +394,8 @@
 		qsend(now.update_cabin_door, 0, 0, 1);
 		if (q_zero(now.update_cabin_door)) { boq = now.update_cabin_door; };
 		_m = 2; goto P999; /* 0 */
-	case 24: // STATE 13 - test.pml:86 - [cabin_door_updated?0] (0:0:0 - 1)
-		reached[2][13] = 1;
+	case 20: // STATE 12 - test.pml:83 - [cabin_door_updated?0] (0:0:0 - 1)
+		reached[2][12] = 1;
 		if (q_zero(now.cabin_door_updated))
 		{	if (boq != now.cabin_door_updated) continue;
 		} else
@@ -537,19 +443,19 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 25: // STATE 14 - test.pml:87 - [floor_request_made[dest] = 0] (0:0:1 - 1)
+	case 21: // STATE 13 - test.pml:84 - [floor_request_made[dest] = 0] (0:0:1 - 1)
 		IfNotBlocked
-		reached[2][14] = 1;
-		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 2) ]);
-		now.floor_request_made[ Index(((P2 *)_this)->dest, 2) ] = 0;
+		reached[2][13] = 1;
+		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 255) ]);
+		now.floor_request_made[ Index(((P2 *)_this)->dest, 255) ] = 0;
 #ifdef VAR_RANGES
-		logval("floor_request_made[main_control:dest]", ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 2) ]));
+		logval("floor_request_made[main_control:dest]", ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 255) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 26: // STATE 15 - test.pml:88 - [served!1] (0:0:0 - 1)
+	case 22: // STATE 14 - test.pml:85 - [served!1] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][15] = 1;
+		reached[2][14] = 1;
 		if (q_full(now.served))
 			continue;
 #ifdef HAS_CODE
@@ -562,15 +468,15 @@
 		qsend(now.served, 0, 1, 1);
 		if (q_zero(now.served)) { boq = now.served; };
 		_m = 2; goto P999; /* 0 */
-	case 27: // STATE 19 - test.pml:91 - [(going_up)] (0:0:0 - 1)
+	case 23: // STATE 18 - test.pml:88 - [((dest>current_floor))] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][19] = 1;
-		if (!(((int)((P2 *)_this)->going_up)))
+		reached[2][18] = 1;
+		if (!((((int)((P2 *)_this)->dest)>((int)now.current_floor))))
 			continue;
 		_m = 3; goto P999; /* 0 */
-	case 28: // STATE 20 - test.pml:92 - [current_floor = (current_floor+1)] (0:0:1 - 1)
+	case 24: // STATE 19 - test.pml:89 - [current_floor = (current_floor+1)] (0:0:1 - 1)
 		IfNotBlocked
-		reached[2][20] = 1;
+		reached[2][19] = 1;
 		(trpt+1)->bup.oval = ((int)now.current_floor);
 		now.current_floor = (((int)now.current_floor)+1);
 #ifdef VAR_RANGES
@@ -578,15 +484,15 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 29: // STATE 21 - test.pml:93 - [(going_down)] (0:0:0 - 1)
+	case 25: // STATE 20 - test.pml:90 - [((dest<current_floor))] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][21] = 1;
-		if (!(((int)((P2 *)_this)->going_down)))
+		reached[2][20] = 1;
+		if (!((((int)((P2 *)_this)->dest)<((int)now.current_floor))))
 			continue;
 		_m = 3; goto P999; /* 0 */
-	case 30: // STATE 22 - test.pml:94 - [current_floor = (current_floor-1)] (0:0:1 - 1)
+	case 26: // STATE 21 - test.pml:91 - [current_floor = (current_floor-1)] (0:0:1 - 1)
 		IfNotBlocked
-		reached[2][22] = 1;
+		reached[2][21] = 1;
 		(trpt+1)->bup.oval = ((int)now.current_floor);
 		now.current_floor = (((int)now.current_floor)-1);
 #ifdef VAR_RANGES
@@ -594,9 +500,9 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 31: // STATE 24 - test.pml:97 - [move!0] (0:0:0 - 1)
+	case 27: // STATE 23 - test.pml:94 - [move!0] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][24] = 1;
+		reached[2][23] = 1;
 		if (q_full(now.move))
 			continue;
 #ifdef HAS_CODE
@@ -609,14 +515,14 @@
 		qsend(now.move, 0, 0, 1);
 		if (q_zero(now.move)) { boq = now.move; };
 		_m = 2; goto P999; /* 0 */
-	case 32: // STATE 34 - test.pml:103 - [-end-] (0:0:0 - 1)
+	case 28: // STATE 33 - test.pml:100 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
-		reached[2][34] = 1;
+		reached[2][33] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 
 		 /* PROC elevator_engine */
-	case 33: // STATE 1 - test.pml:56 - [move?1] (0:0:0 - 1)
+	case 29: // STATE 1 - test.pml:56 - [move?1] (0:0:0 - 1)
 		reached[1][1] = 1;
 		if (q_zero(now.move))
 		{	if (boq != now.move) continue;
@@ -665,7 +571,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 34: // STATE 2 - test.pml:58 - [move?0] (0:0:0 - 1)
+	case 30: // STATE 2 - test.pml:58 - [move?0] (0:0:0 - 1)
 		reached[1][2] = 1;
 		if (q_zero(now.move))
 		{	if (boq != now.move) continue;
@@ -714,7 +620,7 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 35: // STATE 4 - test.pml:59 - [floor_reached!1] (0:0:0 - 1)
+	case 31: // STATE 4 - test.pml:59 - [floor_reached!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[1][4] = 1;
 		if (q_full(now.floor_reached))
@@ -729,14 +635,14 @@
 		qsend(now.floor_reached, 0, 1, 1);
 		if (q_zero(now.floor_reached)) { boq = now.floor_reached; };
 		_m = 2; goto P999; /* 0 */
-	case 36: // STATE 11 - test.pml:62 - [-end-] (0:0:0 - 1)
+	case 32: // STATE 11 - test.pml:62 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
 		reached[1][11] = 1;
 		if (!delproc(1, II)) continue;
 		_m = 3; goto P999; /* 0 */
 
 		 /* PROC cabin_door */
-	case 37: // STATE 1 - test.pml:48 - [update_cabin_door?1] (0:0:0 - 1)
+	case 33: // STATE 1 - test.pml:48 - [update_cabin_door?1] (0:0:0 - 1)
 		reached[0][1] = 1;
 		if (q_zero(now.update_cabin_door))
 		{	if (boq != now.update_cabin_door) continue;
@@ -785,27 +691,27 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 38: // STATE 2 - test.pml:48 - [floor_door_is_open[current_floor] = 1] (0:0:1 - 1)
+	case 34: // STATE 2 - test.pml:48 - [floor_door_is_open[current_floor] = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][2] = 1;
-		(trpt+1)->bup.oval = ((int)floor_door_is_open[ Index(((int)now.current_floor), 2) ]);
-		floor_door_is_open[ Index(now.current_floor, 2) ] = 1;
+		(trpt+1)->bup.oval = ((int)now.floor_door_is_open[ Index(((int)now.current_floor), 255) ]);
+		now.floor_door_is_open[ Index(now.current_floor, 255) ] = 1;
 #ifdef VAR_RANGES
-		logval("floor_door_is_open[current_floor]", ((int)floor_door_is_open[ Index(((int)now.current_floor), 2) ]));
+		logval("floor_door_is_open[current_floor]", ((int)now.floor_door_is_open[ Index(((int)now.current_floor), 255) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 39: // STATE 3 - test.pml:48 - [cabin_door_is_open = 1] (0:0:1 - 1)
+	case 35: // STATE 3 - test.pml:48 - [cabin_door_is_open = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][3] = 1;
-		(trpt+1)->bup.oval = ((int)cabin_door_is_open);
-		cabin_door_is_open = 1;
+		(trpt+1)->bup.oval = ((int)now.cabin_door_is_open);
+		now.cabin_door_is_open = 1;
 #ifdef VAR_RANGES
-		logval("cabin_door_is_open", ((int)cabin_door_is_open));
+		logval("cabin_door_is_open", ((int)now.cabin_door_is_open));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 40: // STATE 4 - test.pml:48 - [cabin_door_updated!1] (0:0:0 - 1)
+	case 36: // STATE 4 - test.pml:48 - [cabin_door_updated!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[0][4] = 1;
 		if (q_full(now.cabin_door_updated))
@@ -820,7 +726,7 @@
 		qsend(now.cabin_door_updated, 0, 1, 1);
 		if (q_zero(now.cabin_door_updated)) { boq = now.cabin_door_updated; };
 		_m = 2; goto P999; /* 0 */
-	case 41: // STATE 5 - test.pml:49 - [update_cabin_door?0] (0:0:0 - 1)
+	case 37: // STATE 5 - test.pml:49 - [update_cabin_door?0] (0:0:0 - 1)
 		reached[0][5] = 1;
 		if (q_zero(now.update_cabin_door))
 		{	if (boq != now.update_cabin_door) continue;
@@ -869,27 +775,27 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 42: // STATE 6 - test.pml:49 - [cabin_door_is_open = 0] (0:0:1 - 1)
+	case 38: // STATE 6 - test.pml:49 - [cabin_door_is_open = 0] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][6] = 1;
-		(trpt+1)->bup.oval = ((int)cabin_door_is_open);
-		cabin_door_is_open = 0;
+		(trpt+1)->bup.oval = ((int)now.cabin_door_is_open);
+		now.cabin_door_is_open = 0;
 #ifdef VAR_RANGES
-		logval("cabin_door_is_open", ((int)cabin_door_is_open));
+		logval("cabin_door_is_open", ((int)now.cabin_door_is_open));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 43: // STATE 7 - test.pml:49 - [floor_door_is_open[current_floor] = 0] (0:0:1 - 1)
+	case 39: // STATE 7 - test.pml:49 - [floor_door_is_open[current_floor] = 0] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][7] = 1;
-		(trpt+1)->bup.oval = ((int)floor_door_is_open[ Index(((int)now.current_floor), 2) ]);
-		floor_door_is_open[ Index(now.current_floor, 2) ] = 0;
+		(trpt+1)->bup.oval = ((int)now.floor_door_is_open[ Index(((int)now.current_floor), 255) ]);
+		now.floor_door_is_open[ Index(now.current_floor, 255) ] = 0;
 #ifdef VAR_RANGES
-		logval("floor_door_is_open[current_floor]", ((int)floor_door_is_open[ Index(((int)now.current_floor), 2) ]));
+		logval("floor_door_is_open[current_floor]", ((int)now.floor_door_is_open[ Index(((int)now.current_floor), 255) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 44: // STATE 8 - test.pml:49 - [cabin_door_updated!0] (0:0:0 - 1)
+	case 40: // STATE 8 - test.pml:49 - [cabin_door_updated!0] (0:0:0 - 1)
 		IfNotBlocked
 		reached[0][8] = 1;
 		if (q_full(now.cabin_door_updated))
@@ -904,7 +810,7 @@
 		qsend(now.cabin_door_updated, 0, 0, 1);
 		if (q_zero(now.cabin_door_updated)) { boq = now.cabin_door_updated; };
 		_m = 2; goto P999; /* 0 */
-	case 45: // STATE 12 - test.pml:51 - [-end-] (0:0:0 - 1)
+	case 41: // STATE 12 - test.pml:51 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
 		reached[0][12] = 1;
 		if (!delproc(1, II)) continue;

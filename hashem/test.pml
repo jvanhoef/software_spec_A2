@@ -76,6 +76,7 @@ active proctype main_control() {
 							update_cabin_door!true;
 							if
 							:: cabin_door_updated?true ->
+											assert (cabin_door_is_open && floor_door_is_open[current_floor])
 											update_cabin_door!false;
 							fi;
 							if
