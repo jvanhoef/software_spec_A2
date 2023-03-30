@@ -7,6 +7,12 @@
 //ltl p1 { []<> (floor_request_made[1]==true) } /* this property does not hold, as a request for floor 1 can be indefinitely postponed. */
 //ltl p2 { []<> (cabin_door_is_open==true) } /* this property should hold, but does not yet; at any moment during an execution, the opening of the cabin door will happen at some later point. */
 
+// ltl a1 { <> (floor_request_made[1] -> current_floor == 1 ) }; // holds
+// ltl a2 { <> (floor_request_made[2] -> current_floor == 2) }; // holds
+//ltl b1 { []<>cabin_door_is_open}; // holds
+// ltl b2 { []<>!cabin_door_is_open	};	// holds
+
+
 // the number of floors
 #define N	4
 
@@ -39,14 +45,8 @@ chan served = [0] of { bool };
 // cabin door process
 active proctype cabin_door() {
 	do
-	:: update_cabin_door?true -> 
-		floor_door_is_open[current_floor] = true; 
-		cabin_door_is_open = true; 
-		cabin_door_updated!true;
-	:: update_cabin_door?false -> 
-		cabin_door_is_open = false; 
-		floor_door_is_open[current_floor] = false; 
-		cabin_door_updated!false;
+	:: update_cabin_door?true -> floor_door_is_open[current_floor] = true; cabin_door_is_open = true; cabin_door_updated!true;
+	:: update_cabin_door?false -> cabin_door_is_open = false; floor_door_is_open[current_floor] = false; cabin_door_updated!false;
 	od;
 }
 
@@ -61,55 +61,50 @@ active proctype elevator_engine() {
 	od;
 }
 
-// DUMMY main control process. Remodel it to control the doors and the engine!
 active proctype main_control() {
-    byte dest;
-    do
-    :: go?dest ->
-        move!true;
+	byte dest;
+	do
+	:: go?dest ->
+	assert (0 <= dest && dest < N)
+		move!true;
 
-        // determine direction of travel
-        bool going_up = (dest > current_floor);
-        bool going_down = (dest < current_floor);
+		// move in the direction of the destination floor
+		do
+		:: floor_reached?true ->
+			if
+			:: current_floor == dest ->
+							move!false;
+							update_cabin_door!true;
+							if
+							:: cabin_door_updated?true ->
+											assert (cabin_door_is_open && floor_door_is_open[current_floor])
+											update_cabin_door!false;
+							fi;
+							if
+							:: cabin_door_updated?false ->
+											floor_request_made[dest] = false;
+											served!true;
+							fi;
+							break;
+			:: dest > current_floor ->
+							current_floor++;
+			:: dest < current_floor ->
+							current_floor--;
+			:: else ->
+							// stop moving if direction is none
+							move!false;
+							break;
+			fi;
+		od;
 
-        // move in the direction of the destination floor
-        do
-        :: floor_reached?true ->
-            if
-            :: current_floor == dest ->
-                move!false;
-                update_cabin_door!true;
-                if
-                :: cabin_door_updated?true ->
-                    update_cabin_door!false;
-                fi;
-                if
-                :: cabin_door_updated?false ->
-                    floor_request_made[dest] = false;
-                    served!true;
-                fi;
-                break;
-            :: going_up ->
-                current_floor++;
-            :: going_down ->
-                current_floor--;
-            :: else ->
-                // stop moving if direction is none
-                move!false;
-                break;
-            fi;
-        od;
-
-    od;
+	od;
 }
 
 // request handler process. Remodel this process to serve M elevators!
 active proctype req_handler() {
 	byte dest;
 	do
-	:: request?dest -> 
-		go!dest; 
-		served?true;
+	:: request?dest -> go!dest; served?true;
 	od;
 }
 

@@ -14,7 +14,7 @@
 
 
 // the number of floors
-#define N	255
+#define N	4
 
 // IDs of req_button processes
 #define reqid _pid-4
@@ -65,6 +65,7 @@ active proctype main_control() {
 	byte dest;
 	do
 	:: go?dest ->
+	assert (dest > 0)
 		move!true;
 
 		// move in the direction of the destination floor
