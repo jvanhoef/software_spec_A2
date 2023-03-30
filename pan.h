@@ -2,7 +2,7 @@
 #define PAN_H
 
 #define SpinVersion	"Spin Version 6.5.1 -- 20 December 2019"
-#define PanSource	"test.pml"
+#define PanSource	"sec_env.pml"
 
 #define G_long	8
 #define G_int	4
@@ -102,7 +102,6 @@
 #ifndef NFAIR
 	#define NFAIR	2	/* must be >= 2 */
 #endif
-#define HAS_LTL	1
 #define HAS_CODE	1
 #if defined(RANDSTORE) && !defined(RANDSTOR)
 	#define RANDSTOR	RANDSTORE
@@ -121,16 +120,10 @@
 #endif
 #ifdef NP
 	#define HAS_NP	2
-	#define VERI	6	/* np_ */
+	#define VERI	5	/* np_ */
 #endif
 #if defined(NOCLAIM) && defined(NP)
 	#undef NOCLAIM
-#endif
-#ifndef NOCLAIM
-	#define NCLAIMS	1
-	#ifndef NP
-		#define VERI	5
-	#endif
 #endif
 
 typedef struct S_F_MAP {
@@ -138,11 +131,6 @@ typedef struct S_F_MAP {
 	int from;
 	int upto;
 } S_F_MAP;
-
-#define _nstates5	14	/* p3 */
-#define minseq5	72
-#define maxseq5	84
-#define _endstate5	13
 
 #define _nstates4	9	/* req_button */
 #define minseq4	64
@@ -169,13 +157,11 @@ typedef struct S_F_MAP {
 #define maxseq0	11
 #define _endstate0	12
 
-extern short src_ln5[];
 extern short src_ln4[];
 extern short src_ln3[];
 extern short src_ln2[];
 extern short src_ln1[];
 extern short src_ln0[];
-extern S_F_MAP src_file5[];
 extern S_F_MAP src_file4[];
 extern S_F_MAP src_file3[];
 extern S_F_MAP src_file2[];
@@ -183,8 +169,8 @@ extern S_F_MAP src_file1[];
 extern S_F_MAP src_file0[];
 
 #define T_ID	unsigned char
-#define _T5	46
-#define _T2	47
+#define _T5	43
+#define _T2	44
 #define WS		8 /* word size in bytes */
 #define SYNC	6
 #define ASYNC	1
@@ -198,16 +184,6 @@ extern S_F_MAP src_file0[];
 		#define NCORE	1
 	#endif
 #endif
-
-typedef struct P5 { /* p3 */
-	unsigned _pid : 8;  /* 0..255 */
-	unsigned _t   : 4; /* proctype */
-	unsigned _p   : 7; /* state    */
-#ifdef HAS_PRIORITY
-	unsigned _priority : 8; /* 0..255 */
-#endif
-} P5;
-#define Air5	(sizeof(P5) - 3)
 
 #define Preq_button	((P4 *)_this)
 typedef struct P4 { /* req_button */
@@ -240,8 +216,6 @@ typedef struct P2 { /* main_control */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
-	unsigned going_up : 1;
-	unsigned going_down : 1;
 	uchar dest;
 } P2;
 #define Air2	(sizeof(P2) - Offsetof(P2, dest) - 1*sizeof(uchar))
@@ -268,15 +242,15 @@ typedef struct P0 { /* cabin_door */
 } P0;
 #define Air0	(sizeof(P0) - 3)
 
-typedef struct P6 { /* np_ */
+typedef struct P5 { /* np_ */
 	unsigned _pid : 8;  /* 0..255 */
 	unsigned _t   : 4; /* proctype */
 	unsigned _p   : 7; /* state    */
 #ifdef HAS_PRIORITY
 	unsigned _priority : 8; /* 0..255 */
 #endif
-} P6;
-#define Air6	(sizeof(P6) - 3)
+} P5;
+#define Air5	(sizeof(P5) - 3)
 
 #define Pclaim	P0
 #ifndef NCLAIMS
@@ -468,7 +442,8 @@ typedef struct State {
 		unsigned short _event;
 	#endif
 #endif
-	uchar floor_request_made[2];
+	uchar floor_request_made[4];
+	uchar floor_door_is_open[4];
 	unsigned cabin_door_is_open : 1;
 	uchar current_floor;
 	uchar request;
@@ -499,16 +474,14 @@ typedef struct TRIX_v6 {
 #endif
 
 #define HAS_TRACK	0
-/* hidden variable: */	uchar floor_door_is_open[2];
 #define FORWARD_MOVES	"pan.m"
 #define BACKWARD_MOVES	"pan.b"
 #define TRANSITIONS	"pan.t"
-#define _NP_	6
-#define _nstates6	3 /* np_ */
-#define _endstate6	2 /* np_ */
+#define _NP_	5
+#define _nstates5	3 /* np_ */
+#define _endstate5	2 /* np_ */
 
-#define _start6	0 /* np_ */
-#define _start5	5
+#define _start5	0 /* np_ */
 #define _start4	5
 #define _start3	4
 #define _start2	31
@@ -517,7 +490,7 @@ typedef struct TRIX_v6 {
 #ifdef NP
 	#define ACCEPT_LAB	1 /* at least 1 in np_ */
 #else
-	#define ACCEPT_LAB	1 /* user-defined accept labels */
+	#define ACCEPT_LAB	0 /* user-defined accept labels */
 #endif
 #ifdef MEMCNT
 	#ifdef MEMLIM
@@ -594,7 +567,7 @@ typedef struct Q1 {
 	uchar _t;	/* q_type */
 	struct {
 		uchar fld0;
-	} contents[2];
+	} contents[4];
 } Q1;
 typedef struct Q0 {	/* generic q */
 	uchar Qlen;	/* q_size */
@@ -922,7 +895,7 @@ void qsend(int, int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	48
+#define NTRANS	45
 #if defined(BFS_PAR) || NCORE>1
 	void e_critical(int);
 	void x_critical(int);

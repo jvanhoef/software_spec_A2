@@ -22,28 +22,7 @@ settable(void)
 {	Trans *T;
 	Trans *settr(int, int, int, int, int, char *, int, int, int);
 
-	trans = (Trans ***) emalloc(7*sizeof(Trans **));
-
-	/* proctype 5: p3 */
-
-	trans[5] = (Trans **) emalloc(14*sizeof(Trans *));
-
-	trans[5][6]	= settr(77,0,5,1,0,".(goto)", 0, 2, 0);
-	T = trans[5][5] = settr(76,0,0,0,0,"DO", 0, 2, 0);
-	T = T->nxt	= settr(76,0,1,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(76,0,3,0,0,"DO", 0, 2, 0);
-	trans[5][1]	= settr(72,0,10,3,0,"(!(cabin_door_is_open))", 1, 2, 0);
-	trans[5][2]	= settr(73,0,10,1,0,"goto accept_S4", 0, 2, 0);
-	trans[5][3]	= settr(74,0,5,1,0,"(1)", 0, 2, 0);
-	trans[5][4]	= settr(75,0,5,1,0,"goto T0_init", 0, 2, 0);
-	trans[5][7]	= settr(78,0,10,1,0,"break", 0, 2, 0);
-	trans[5][11]	= settr(82,0,10,1,0,".(goto)", 0, 2, 0);
-	T = trans[5][10] = settr(81,0,0,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(81,0,8,0,0,"DO", 0, 2, 0);
-	trans[5][8]	= settr(79,0,10,4,0,"(!(cabin_door_is_open))", 1, 2, 0);
-	trans[5][9]	= settr(80,0,10,1,0,"goto accept_S4", 0, 2, 0);
-	trans[5][12]	= settr(83,0,13,1,0,"break", 0, 2, 0);
-	trans[5][13]	= settr(84,0,0,5,5,"-end-", 0, 3500, 0);
+	trans = (Trans ***) emalloc(6*sizeof(Trans **));
 
 	/* proctype 4: req_button */
 
@@ -52,13 +31,13 @@ settable(void)
 	trans[4][6]	= settr(69,0,5,1,0,".(goto)", 0, 2, 0);
 	T = trans[4][5] = settr(68,0,0,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(68,0,1,0,0,"DO", 0, 2, 0);
-	trans[4][1]	= settr(64,0,4,6,0,"(!(floor_request_made[(_pid-4)]))", 1, 2, 0);
+	trans[4][1]	= settr(64,0,4,3,0,"(!(floor_request_made[(_pid-4)]))", 1, 2, 0);
 	T = trans[ 4][4] = settr(67,2,0,0,0,"ATOMIC", 1, 2, 0);
 	T->nxt	= settr(67,2,2,0,0,"ATOMIC", 1, 3, 0);
-	trans[4][2]	= settr(65,2,3,7,7,"request!(_pid-4)", 1, 3, 0);
-	trans[4][3]	= settr(66,0,5,8,8,"floor_request_made[(_pid-4)] = 1", 1, 3, 0);
+	trans[4][2]	= settr(65,2,3,4,4,"request!(_pid-4)", 1, 3, 0);
+	trans[4][3]	= settr(66,0,5,5,5,"floor_request_made[(_pid-4)] = 1", 1, 3, 0);
 	trans[4][7]	= settr(70,0,8,1,0,"break", 0, 2, 0);
-	trans[4][8]	= settr(71,0,0,9,9,"-end-", 0, 3500, 0);
+	trans[4][8]	= settr(71,0,0,6,6,"-end-", 0, 3500, 0);
 
 	/* proctype 3: req_handler */
 
@@ -67,11 +46,11 @@ settable(void)
 	trans[3][5]	= settr(61,0,4,1,0,".(goto)", 0, 2, 0);
 	T = trans[3][4] = settr(60,0,0,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(60,0,1,0,0,"DO", 0, 2, 0);
-	trans[3][1]	= settr(57,0,2,10,10,"request?dest", 1, 503, 0);
-	trans[3][2]	= settr(58,0,3,11,11,"go!dest", 1, 8, 0);
-	trans[3][3]	= settr(59,0,4,12,12,"served?1", 1, 509, 0);
+	trans[3][1]	= settr(57,0,2,7,7,"request?dest", 1, 503, 0);
+	trans[3][2]	= settr(58,0,3,8,8,"go!dest", 1, 8, 0);
+	trans[3][3]	= settr(59,0,4,9,9,"served?1", 1, 509, 0);
 	trans[3][6]	= settr(62,0,7,1,0,"break", 0, 2, 0);
-	trans[3][7]	= settr(63,0,0,13,13,"-end-", 0, 3500, 0);
+	trans[3][7]	= settr(63,0,0,10,10,"-end-", 0, 3500, 0);
 
 	/* proctype 2: main_control */
 
@@ -80,45 +59,45 @@ settable(void)
 	trans[2][32]	= settr(54,0,31,1,0,".(goto)", 0, 2, 0);
 	T = trans[2][31] = settr(53,0,0,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(53,0,1,0,0,"DO", 0, 2, 0);
-	trans[2][1]	= settr(23,0,2,14,14,"go?dest", 1, 508, 0);
-	trans[2][2]	= settr(24,0,3,15,15,"move!1", 1, 6, 0);
-	trans[2][3]	= settr(25,0,4,16,16,"going_up = (dest>current_floor)", 1, 2, 0);
-	trans[2][4]	= settr(26,0,28,17,17,"going_down = (dest<current_floor)", 1, 2, 0);
+	trans[2][1]	= settr(23,0,2,11,11,"go?dest", 1, 508, 0);
+	trans[2][2]	= settr(24,0,3,12,0,"assert(((0<=dest)&&(dest<4)))", 0, 2, 0);
+	trans[2][3]	= settr(25,0,28,13,13,"move!1", 1, 6, 0);
 	trans[2][29]	= settr(51,0,28,1,0,".(goto)", 0, 2, 0);
 	T = trans[2][28] = settr(50,0,0,0,0,"DO", 0, 2, 0);
-	    T->nxt	= settr(50,0,5,0,0,"DO", 0, 2, 0);
-	trans[2][5]	= settr(27,0,26,18,18,"floor_reached?1", 1, 507, 0);
+	    T->nxt	= settr(50,0,4,0,0,"DO", 0, 2, 0);
+	trans[2][4]	= settr(26,0,26,14,14,"floor_reached?1", 1, 507, 0);
 	T = trans[2][26] = settr(48,0,0,0,0,"IF", 0, 2, 0);
-	T = T->nxt	= settr(48,0,6,0,0,"IF", 0, 2, 0);
+	T = T->nxt	= settr(48,0,5,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(48,0,19,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(48,0,21,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(48,0,23,0,0,"IF", 0, 2, 0);
-	trans[2][6]	= settr(28,0,7,19,0,"((current_floor==dest))", 1, 2, 0);
-	trans[2][7]	= settr(29,0,8,20,20,"move!0", 1, 6, 0);
-	trans[2][8]	= settr(30,0,11,21,21,"update_cabin_door!1", 1, 4, 0);
+	trans[2][5]	= settr(27,0,6,15,0,"((current_floor==dest))", 1, 2, 0);
+	trans[2][6]	= settr(28,0,7,16,16,"move!0", 1, 6, 0);
+	trans[2][7]	= settr(29,0,11,17,17,"update_cabin_door!1", 1, 4, 0);
 	T = trans[2][11] = settr(33,0,0,0,0,"IF", 0, 2, 0);
-	    T->nxt	= settr(33,0,9,0,0,"IF", 0, 2, 0);
-	trans[2][9]	= settr(31,0,10,22,22,"cabin_door_updated?1", 1, 505, 0);
-	trans[2][10]	= settr(32,0,16,23,23,"update_cabin_door!0", 1, 4, 0);
+	    T->nxt	= settr(33,0,8,0,0,"IF", 0, 2, 0);
+	trans[2][8]	= settr(30,0,9,18,18,"cabin_door_updated?1", 1, 505, 0);
+	trans[2][9]	= settr(31,0,10,19,0,"assert((cabin_door_is_open&&floor_door_is_open[current_floor]))", 1, 2, 0);
+	trans[2][10]	= settr(32,0,16,20,20,"update_cabin_door!0", 1, 4, 0);
 	trans[2][12]	= settr(34,0,16,1,0,".(goto)", 0, 2, 0);
 	T = trans[2][16] = settr(38,0,0,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(38,0,13,0,0,"IF", 0, 2, 0);
-	trans[2][13]	= settr(35,0,14,24,24,"cabin_door_updated?0", 1, 505, 0);
-	trans[2][14]	= settr(36,0,15,25,25,"floor_request_made[dest] = 0", 1, 2, 0);
-	trans[2][15]	= settr(37,0,31,26,26,"served!1", 1, 9, 0);
+	trans[2][13]	= settr(35,0,14,21,21,"cabin_door_updated?0", 1, 505, 0);
+	trans[2][14]	= settr(36,0,15,22,22,"floor_request_made[dest] = 0", 1, 2, 0);
+	trans[2][15]	= settr(37,0,31,23,23,"served!1", 1, 9, 0);
 	trans[2][17]	= settr(39,0,31,1,0,".(goto)", 0, 2, 0);
 	trans[2][18]	= settr(40,0,31,1,0,"goto :b4", 0, 2, 0);
 	trans[2][27]	= settr(49,0,28,1,0,".(goto)", 0, 2, 0);
-	trans[2][19]	= settr(41,0,20,27,0,"(going_up)", 0, 2, 0);
-	trans[2][20]	= settr(42,0,28,28,28,"current_floor = (current_floor+1)", 1, 2, 0);
-	trans[2][21]	= settr(43,0,22,29,0,"(going_down)", 0, 2, 0);
-	trans[2][22]	= settr(44,0,28,30,30,"current_floor = (current_floor-1)", 1, 2, 0);
+	trans[2][19]	= settr(41,0,20,24,0,"((dest>current_floor))", 1, 2, 0);
+	trans[2][20]	= settr(42,0,28,25,25,"current_floor = (current_floor+1)", 1, 2, 0);
+	trans[2][21]	= settr(43,0,22,26,0,"((dest<current_floor))", 1, 2, 0);
+	trans[2][22]	= settr(44,0,28,27,27,"current_floor = (current_floor-1)", 1, 2, 0);
 	trans[2][23]	= settr(45,0,24,2,0,"else", 0, 2, 0);
-	trans[2][24]	= settr(46,0,31,31,31,"move!0", 1, 6, 0);
+	trans[2][24]	= settr(46,0,31,28,28,"move!0", 1, 6, 0);
 	trans[2][25]	= settr(47,0,31,1,0,"goto :b4", 0, 2, 0);
 	trans[2][30]	= settr(52,0,31,1,0,"break", 0, 2, 0);
 	trans[2][33]	= settr(55,0,34,1,0,"break", 0, 2, 0);
-	trans[2][34]	= settr(56,0,0,32,32,"-end-", 0, 3500, 0);
+	trans[2][34]	= settr(56,0,0,29,29,"-end-", 0, 3500, 0);
 
 	/* proctype 1: elevator_engine */
 
@@ -127,17 +106,17 @@ settable(void)
 	trans[1][9]	= settr(20,0,8,1,0,".(goto)", 0, 2, 0);
 	T = trans[1][8] = settr(19,0,0,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(19,0,1,0,0,"DO", 0, 2, 0);
-	trans[1][1]	= settr(12,0,5,33,33,"move?1", 1, 506, 0);
+	trans[1][1]	= settr(12,0,5,30,30,"move?1", 1, 506, 0);
 	trans[1][6]	= settr(17,0,5,1,0,".(goto)", 0, 2, 0);
 	T = trans[1][5] = settr(16,0,0,0,0,"DO", 0, 2, 0);
 	T = T->nxt	= settr(16,0,2,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(16,0,4,0,0,"DO", 0, 2, 0);
-	trans[1][2]	= settr(13,0,8,34,34,"move?0", 1, 506, 0);
+	trans[1][2]	= settr(13,0,8,31,31,"move?0", 1, 506, 0);
 	trans[1][3]	= settr(14,0,8,1,0,"goto :b2", 0, 2, 0);
-	trans[1][4]	= settr(15,0,5,35,35,"floor_reached!1", 1, 7, 0);
+	trans[1][4]	= settr(15,0,5,32,32,"floor_reached!1", 1, 7, 0);
 	trans[1][7]	= settr(18,0,8,1,0,"break", 0, 2, 0);
 	trans[1][10]	= settr(21,0,11,1,0,"break", 0, 2, 0);
-	trans[1][11]	= settr(22,0,0,36,36,"-end-", 0, 3500, 0);
+	trans[1][11]	= settr(22,0,0,33,33,"-end-", 0, 3500, 0);
 
 	/* proctype 0: cabin_door */
 
@@ -147,16 +126,16 @@ settable(void)
 	T = trans[0][9] = settr(8,0,0,0,0,"DO", 0, 2, 0);
 	T = T->nxt	= settr(8,0,1,0,0,"DO", 0, 2, 0);
 	    T->nxt	= settr(8,0,5,0,0,"DO", 0, 2, 0);
-	trans[0][1]	= settr(0,0,2,37,37,"update_cabin_door?1", 1, 504, 0);
-	trans[0][2]	= settr(1,0,3,38,38,"floor_door_is_open[current_floor] = 1", 1, 2, 0);
-	trans[0][3]	= settr(2,0,4,39,39,"cabin_door_is_open = 1", 1, 2, 0);
-	trans[0][4]	= settr(3,0,9,40,40,"cabin_door_updated!1", 1, 5, 0);
-	trans[0][5]	= settr(4,0,6,41,41,"update_cabin_door?0", 1, 504, 0);
-	trans[0][6]	= settr(5,0,7,42,42,"cabin_door_is_open = 0", 1, 2, 0);
-	trans[0][7]	= settr(6,0,8,43,43,"floor_door_is_open[current_floor] = 0", 1, 2, 0);
-	trans[0][8]	= settr(7,0,9,44,44,"cabin_door_updated!0", 1, 5, 0);
+	trans[0][1]	= settr(0,0,2,34,34,"update_cabin_door?1", 1, 504, 0);
+	trans[0][2]	= settr(1,0,3,35,35,"floor_door_is_open[current_floor] = 1", 1, 2, 0);
+	trans[0][3]	= settr(2,0,4,36,36,"cabin_door_is_open = 1", 1, 2, 0);
+	trans[0][4]	= settr(3,0,9,37,37,"cabin_door_updated!1", 1, 5, 0);
+	trans[0][5]	= settr(4,0,6,38,38,"update_cabin_door?0", 1, 504, 0);
+	trans[0][6]	= settr(5,0,7,39,39,"cabin_door_is_open = 0", 1, 2, 0);
+	trans[0][7]	= settr(6,0,8,40,40,"floor_door_is_open[current_floor] = 0", 1, 2, 0);
+	trans[0][8]	= settr(7,0,9,41,41,"cabin_door_updated!0", 1, 5, 0);
 	trans[0][11]	= settr(10,0,12,1,0,"break", 0, 2, 0);
-	trans[0][12]	= settr(11,0,0,45,45,"-end-", 0, 3500, 0);
+	trans[0][12]	= settr(11,0,0,42,42,"-end-", 0, 3500, 0);
 	/* np_ demon: */
 	trans[_NP_] = (Trans **) emalloc(3*sizeof(Trans *));
 	T = trans[_NP_][0] = settr(9997,0,1,_T5,0,"(np_)", 1,2,0);
