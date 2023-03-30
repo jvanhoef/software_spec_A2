@@ -25,6 +25,7 @@ mtype direction[M];
 chan request = [N] of { byte };
 // status of requests per floor
 bool floor_request_made[N];
+byte elevator_counter = 0;
 
 // status of floor doors of the shaft of the M elevator using 2D array 
 typedef elevs {
@@ -46,7 +47,7 @@ chan served[M] = [0] of { bool };
 
 // cabin door process
 active [M] proctype cabin_door() {
-	byte elevator_id = _pid;
+	byte elevator_id = elevator_counter; elevator_counter++;
 	do
 	:: update_cabin_door[elevator_id]?true ->
 		floor_door_open[elevator_id].door_open[current_floor[elevator_id]] = true;
@@ -61,7 +62,7 @@ active [M] proctype cabin_door() {
 
 // process combining the elevator engine and sensors
 active [M] proctype elevator_engine() {
-	byte elevator_id = _pid;
+	byte elevator_id = elevator_counter; elevator_counter++;
 	do
 	:: move[elevator_id]?true ->
 		do
@@ -73,7 +74,7 @@ active [M] proctype elevator_engine() {
 
 // main control process
 active [M] proctype main_control() {
-	byte elevator_id = _pid;
+	byte elevator_id = elevator_counter; elevator_counter++;
 	byte dest;
 	do
 	:: go[elevator_id]?dest ->
