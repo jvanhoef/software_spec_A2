@@ -45,7 +45,10 @@ chan served = [0] of { bool };
 // cabin door process
 active proctype cabin_door() {
 	do
-	:: update_cabin_door?true -> floor_door_is_open[current_floor] = true; cabin_door_is_open = true; cabin_door_updated!true;
+	:: update_cabin_door?true -> 
+		floor_door_is_open[current_floor] = true; 
+		cabin_door_is_open = true; 
+		cabin_door_updated!true;
 	:: update_cabin_door?false -> cabin_door_is_open = false; floor_door_is_open[current_floor] = false; cabin_door_updated!false;
 	od;
 }

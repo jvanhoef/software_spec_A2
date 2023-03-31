@@ -14,8 +14,9 @@
 
 
 // the number of floors
-#define N	255
-#define M 1
+#define N	4
+// the number of elevators
+#define M 2
 // IDs of req_button processes
 #define reqid _pid-4
 // type for direction of elevator
