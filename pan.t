@@ -36,7 +36,7 @@ settable(void)
 	T = trans[5][12] = settr(91,2,0,0,0,"DO", 1, 2, 0);
 	T = T->nxt	= settr(91,2,3,0,0,"DO", 1, 2, 0);
 	    T->nxt	= settr(91,2,10,0,0,"DO", 1, 2, 0);
-	trans[5][3]	= settr(82,2,4,5,0,"((elevator_nr<2))", 1, 2, 0);
+	trans[5][3]	= settr(82,2,4,5,0,"((elevator_nr<3))", 1, 2, 0);
 	trans[5][4]	= settr(83,2,5,6,6,"(run cabin_door(elevator_nr))", 1, 2, 0);
 	trans[5][5]	= settr(84,2,6,7,7,"(run elevator_engine(elevator_nr))", 1, 2, 0);
 	trans[5][6]	= settr(85,2,7,8,8,"(run main_control(elevator_nr))", 1, 2, 0);
@@ -44,7 +44,7 @@ settable(void)
 	reached5[8] = 1;
 	trans[5][8]	= settr(0,0,0,0,0,"cabin_door_is_open[elevator_nr] = 0",0,0,0);
 	trans[5][9]	= settr(0,0,0,0,0,"elevator_nr = (elevator_nr+1)",0,0,0);
-	trans[5][10]	= settr(89,2,21,10,10,"((elevator_nr==2))", 1, 2, 0); /* m: 15 -> 21,0 */
+	trans[5][10]	= settr(89,2,21,10,10,"((elevator_nr==3))", 1, 2, 0); /* m: 15 -> 21,0 */
 	reached5[15] = 1;
 	trans[5][11]	= settr(90,2,15,1,0,"goto :b7", 1, 2, 0); /* m: 15 -> 0,21 */
 	reached5[15] = 1;
@@ -54,10 +54,10 @@ settable(void)
 	T = trans[5][21] = settr(100,2,0,0,0,"DO", 1, 2, 0);
 	T = T->nxt	= settr(100,2,16,0,0,"DO", 1, 2, 0);
 	    T->nxt	= settr(100,2,19,0,0,"DO", 1, 2, 0);
-	trans[5][16]	= settr(95,2,17,12,0,"((floor_nr<4))", 1, 2, 0);
+	trans[5][16]	= settr(95,2,17,12,0,"((floor_nr<3))", 1, 2, 0);
 	trans[5][17]	= settr(96,2,18,13,13,"(run req_button(floor_nr))", 1, 2, 0);
 	trans[5][18]	= settr(97,2,21,14,14,"floor_nr = (floor_nr+1)", 1, 2, 0);
-	trans[5][19]	= settr(98,2,23,15,15,"((floor_nr==4))", 1, 2, 0); /* m: 20 -> 23,0 */
+	trans[5][19]	= settr(98,2,23,15,15,"((floor_nr==3))", 1, 2, 0); /* m: 20 -> 23,0 */
 	reached5[20] = 1;
 	trans[5][20]	= settr(99,2,23,1,0,"goto :b8", 1, 2, 0);
 	trans[5][23]	= settr(102,0,25,1,0,"break", 1, 2, 0);
@@ -89,7 +89,7 @@ settable(void)
 	T = trans[3][6] = settr(63,0,0,0,0,"IF", 0, 2, 0);
 	T = T->nxt	= settr(63,0,2,0,0,"IF", 0, 2, 0);
 	    T->nxt	= settr(63,0,4,0,0,"IF", 0, 2, 0);
-	trans[3][2]	= settr(59,0,8,22,22,"((current_elevator==2))", 0, 2, 0); /* m: 3 -> 8,0 */
+	trans[3][2]	= settr(59,0,8,22,22,"((current_elevator==3))", 0, 2, 0); /* m: 3 -> 8,0 */
 	reached3[3] = 1;
 	trans[3][3]	= settr(0,0,0,0,0,"current_elevator = 0",0,0,0);
 	trans[3][7]	= settr(64,0,8,1,0,".(goto)", 0, 2, 0);

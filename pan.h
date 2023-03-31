@@ -193,7 +193,7 @@ extern S_F_MAP src_file0[];
 #endif
 
 struct elevs { /* user defined type */
-	uchar door_open[4];
+	uchar door_open[3];
 };
 #define Pinit	((P5 *)_this)
 typedef struct P5 { /* :init: */
@@ -470,16 +470,16 @@ typedef struct State {
 		unsigned short _event;
 	#endif
 #endif
-	uchar floor_request_made[4];
-	uchar current_floor[2];
+	uchar floor_request_made[3];
+	uchar current_floor[3];
 	uchar request;
-	uchar update_cabin_door[2];
-	uchar cabin_door_updated[2];
-	uchar move[2];
-	uchar floor_reached[2];
-	uchar go[2];
-	uchar served[2];
-	struct elevs elevator[2];
+	uchar update_cabin_door[3];
+	uchar cabin_door_updated[3];
+	uchar move[3];
+	uchar floor_reached[3];
+	uchar go[3];
+	uchar served[3];
+	struct elevs elevator[3];
 #ifdef TRIX
 	/* room for 512 proc+chan ptrs, + safety margin */
 	char *_ids_[MAXPROC+MAXQ+4];
@@ -501,9 +501,9 @@ typedef struct TRIX_v6 {
 #endif
 
 #define HAS_TRACK	0
-/* hidden variable: */	uchar cabin_door_is_open[2];
+/* hidden variable: */	uchar cabin_door_is_open[3];
 /* hidden variable: */	uchar elevator_counter;
-/* hidden variable: */	uchar direction[2];
+/* hidden variable: */	uchar direction[3];
 #define FORWARD_MOVES	"pan.m"
 #define BACKWARD_MOVES	"pan.b"
 #define TRANSITIONS	"pan.t"
@@ -550,7 +550,49 @@ typedef struct TRIX_v6 {
 	#define MEMLIM	(2048)	/* need a default, using 2 GB */
 #endif
 #define PROG_LAB	0 /* progress labels */
-#define NQS	13
+#define NQS	19
+typedef struct Q19 {
+	uchar Qlen;	/* q_size */
+	uchar _t;	/* q_type */
+	struct {
+		uchar fld0;
+	} contents[1];
+} Q19;
+typedef struct Q18 {
+	uchar Qlen;	/* q_size */
+	uchar _t;	/* q_type */
+	struct {
+		uchar fld0;
+	} contents[1];
+} Q18;
+typedef struct Q17 {
+	uchar Qlen;	/* q_size */
+	uchar _t;	/* q_type */
+	struct {
+		uchar fld0;
+	} contents[1];
+} Q17;
+typedef struct Q16 {
+	uchar Qlen;	/* q_size */
+	uchar _t;	/* q_type */
+	struct {
+		uchar fld0;
+	} contents[1];
+} Q16;
+typedef struct Q15 {
+	uchar Qlen;	/* q_size */
+	uchar _t;	/* q_type */
+	struct {
+		uchar fld0;
+	} contents[1];
+} Q15;
+typedef struct Q14 {
+	uchar Qlen;	/* q_size */
+	uchar _t;	/* q_type */
+	struct {
+		uchar fld0;
+	} contents[1];
+} Q14;
 typedef struct Q13 {
 	uchar Qlen;	/* q_size */
 	uchar _t;	/* q_type */
@@ -640,7 +682,7 @@ typedef struct Q1 {
 	uchar _t;	/* q_type */
 	struct {
 		uchar fld0;
-	} contents[4];
+	} contents[3];
 } Q1;
 typedef struct Q0 {	/* generic q */
 	uchar Qlen;	/* q_size */

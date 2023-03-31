@@ -36,10 +36,10 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 5: // STATE 3 - multi-j.pml:148 - [((elevator_nr<2))] (0:0:0 - 1)
+	case 5: // STATE 3 - multi-j.pml:148 - [((elevator_nr<3))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[5][3] = 1;
-		if (!((((int)((P5 *)_this)->elevator_nr)<2)))
+		if (!((((int)((P5 *)_this)->elevator_nr)<3)))
 			continue;
 		_m = 3; goto P999; /* 0 */
 	case 6: // STATE 4 - multi-j.pml:149 - [(run cabin_door(elevator_nr))] (0:0:0 - 1)
@@ -64,18 +64,18 @@
 		IfNotBlocked
 		reached[5][7] = 1;
 		(trpt+1)->bup.ovals = grab_ints(3);
-		(trpt+1)->bup.ovals[0] = ((int)now.current_floor[ Index(((int)((P5 *)_this)->elevator_nr), 2) ]);
-		now.current_floor[ Index(((P5 *)_this)->elevator_nr, 2) ] = 0;
+		(trpt+1)->bup.ovals[0] = ((int)now.current_floor[ Index(((int)((P5 *)_this)->elevator_nr), 3) ]);
+		now.current_floor[ Index(((P5 *)_this)->elevator_nr, 3) ] = 0;
 #ifdef VAR_RANGES
-		logval("current_floor[:init::elevator_nr]", ((int)now.current_floor[ Index(((int)((P5 *)_this)->elevator_nr), 2) ]));
+		logval("current_floor[:init::elevator_nr]", ((int)now.current_floor[ Index(((int)((P5 *)_this)->elevator_nr), 3) ]));
 #endif
 		;
 		/* merge: cabin_door_is_open[elevator_nr] = 0(12, 8, 12) */
 		reached[5][8] = 1;
-		(trpt+1)->bup.ovals[1] = ((int)cabin_door_is_open[ Index(((int)((P5 *)_this)->elevator_nr), 2) ]);
-		cabin_door_is_open[ Index(((P5 *)_this)->elevator_nr, 2) ] = 0;
+		(trpt+1)->bup.ovals[1] = ((int)cabin_door_is_open[ Index(((int)((P5 *)_this)->elevator_nr), 3) ]);
+		cabin_door_is_open[ Index(((P5 *)_this)->elevator_nr, 3) ] = 0;
 #ifdef VAR_RANGES
-		logval("cabin_door_is_open[:init::elevator_nr]", ((int)cabin_door_is_open[ Index(((int)((P5 *)_this)->elevator_nr), 2) ]));
+		logval("cabin_door_is_open[:init::elevator_nr]", ((int)cabin_door_is_open[ Index(((int)((P5 *)_this)->elevator_nr), 3) ]));
 #endif
 		;
 		/* merge: elevator_nr = (elevator_nr+1)(12, 9, 12) */
@@ -90,10 +90,10 @@
 		reached[5][13] = 1;
 		;
 		_m = 3; goto P999; /* 3 */
-	case 10: // STATE 10 - multi-j.pml:156 - [((elevator_nr==2))] (21:0:2 - 1)
+	case 10: // STATE 10 - multi-j.pml:156 - [((elevator_nr==3))] (21:0:2 - 1)
 		IfNotBlocked
 		reached[5][10] = 1;
-		if (!((((int)((P5 *)_this)->elevator_nr)==2)))
+		if (!((((int)((P5 *)_this)->elevator_nr)==3)))
 			continue;
 		if (TstOnly) return 1; /* TT */
 		/* dead 1: elevator_nr */  (trpt+1)->bup.ovals = grab_ints(2);
@@ -130,10 +130,10 @@
 		reached[5][22] = 1;
 		;
 		_m = 3; goto P999; /* 1 */
-	case 12: // STATE 16 - multi-j.pml:161 - [((floor_nr<4))] (0:0:0 - 1)
+	case 12: // STATE 16 - multi-j.pml:161 - [((floor_nr<3))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[5][16] = 1;
-		if (!((((int)((P5 *)_this)->floor_nr)<4)))
+		if (!((((int)((P5 *)_this)->floor_nr)<3)))
 			continue;
 		_m = 3; goto P999; /* 0 */
 	case 13: // STATE 17 - multi-j.pml:162 - [(run req_button(floor_nr))] (0:0:0 - 1)
@@ -152,10 +152,10 @@
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
-	case 15: // STATE 19 - multi-j.pml:164 - [((floor_nr==4))] (23:0:1 - 1)
+	case 15: // STATE 19 - multi-j.pml:164 - [((floor_nr==3))] (23:0:1 - 1)
 		IfNotBlocked
 		reached[5][19] = 1;
-		if (!((((int)((P5 *)_this)->floor_nr)==4)))
+		if (!((((int)((P5 *)_this)->floor_nr)==3)))
 			continue;
 		if (TstOnly) return 1; /* TT */
 		/* dead 1: floor_nr */  (trpt+1)->bup.oval = ((P5 *)_this)->floor_nr;
@@ -177,7 +177,7 @@
 	case 17: // STATE 1 - multi-j.pml:133 - [(!(floor_request_made[floor_nr]))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[4][1] = 1;
-		if (!( !(((int)now.floor_request_made[ Index(((int)((P4 *)_this)->floor_nr), 4) ]))))
+		if (!( !(((int)now.floor_request_made[ Index(((int)((P4 *)_this)->floor_nr), 3) ]))))
 			continue;
 		_m = 3; goto P999; /* 0 */
 	case 18: // STATE 2 - multi-j.pml:135 - [request!floor_nr] (0:0:0 - 1)
@@ -198,10 +198,10 @@
 	case 19: // STATE 3 - multi-j.pml:136 - [floor_request_made[floor_nr] = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[4][3] = 1;
-		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index(((int)((P4 *)_this)->floor_nr), 4) ]);
-		now.floor_request_made[ Index(((P4 *)_this)->floor_nr, 4) ] = 1;
+		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index(((int)((P4 *)_this)->floor_nr), 3) ]);
+		now.floor_request_made[ Index(((P4 *)_this)->floor_nr, 3) ] = 1;
 #ifdef VAR_RANGES
-		logval("floor_request_made[req_button:floor_nr]", ((int)now.floor_request_made[ Index(((int)((P4 *)_this)->floor_nr), 4) ]));
+		logval("floor_request_made[req_button:floor_nr]", ((int)now.floor_request_made[ Index(((int)((P4 *)_this)->floor_nr), 3) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
@@ -260,10 +260,10 @@
 
 		};
 		_m = 4; goto P999; /* 0 */
-	case 22: // STATE 2 - multi-j.pml:120 - [((current_elevator==2))] (8:0:2 - 1)
+	case 22: // STATE 2 - multi-j.pml:120 - [((current_elevator==3))] (8:0:2 - 1)
 		IfNotBlocked
 		reached[3][2] = 1;
-		if (!((((int)((P3 *)_this)->current_elevator)==2)))
+		if (!((((int)((P3 *)_this)->current_elevator)==3)))
 			continue;
 		if (TstOnly) return 1; /* TT */
 		/* dead 1: current_elevator */  (trpt+1)->bup.ovals = grab_ints(2);
@@ -287,45 +287,45 @@
 	case 23: // STATE 8 - multi-j.pml:124 - [go[current_elevator]!dest] (0:0:0 - 3)
 		IfNotBlocked
 		reached[3][8] = 1;
-		if (q_full(now.go[ Index(((int)((P3 *)_this)->current_elevator), 2) ]))
+		if (q_full(now.go[ Index(((int)((P3 *)_this)->current_elevator), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.go[ Index(((int)((P3 *)_this)->current_elevator), 2) ]);
+			sprintf(simvals, "%d!", now.go[ Index(((int)((P3 *)_this)->current_elevator), 3) ]);
 		sprintf(simtmp, "%d", ((int)((P3 *)_this)->dest)); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.go[ Index(((int)((P3 *)_this)->current_elevator), 2) ], 0, ((int)((P3 *)_this)->dest), 1);
-		if (q_zero(now.go[ Index(((int)((P3 *)_this)->current_elevator), 2) ])) { boq = now.go[ Index(((int)((P3 *)_this)->current_elevator), 2) ]; };
+		qsend(now.go[ Index(((int)((P3 *)_this)->current_elevator), 3) ], 0, ((int)((P3 *)_this)->dest), 1);
+		if (q_zero(now.go[ Index(((int)((P3 *)_this)->current_elevator), 3) ])) { boq = now.go[ Index(((int)((P3 *)_this)->current_elevator), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 24: // STATE 9 - multi-j.pml:125 - [served[current_elevator]?1] (0:0:0 - 1)
 		reached[3][9] = 1;
-		if (q_zero(now.served[ Index(((int)((P3 *)_this)->current_elevator), 2) ]))
-		{	if (boq != now.served[ Index(((int)((P3 *)_this)->current_elevator), 2) ]) continue;
+		if (q_zero(now.served[ Index(((int)((P3 *)_this)->current_elevator), 3) ]))
+		{	if (boq != now.served[ Index(((int)((P3 *)_this)->current_elevator), 3) ]) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.served[ Index(((int)((P3 *)_this)->current_elevator), 2) ]) == 0) continue;
+		if (q_len(now.served[ Index(((int)((P3 *)_this)->current_elevator), 3) ]) == 0) continue;
 
 		XX=1;
-		if (1 != qrecv(now.served[ Index(((int)((P3 *)_this)->current_elevator), 2) ], 0, 0, 0)) continue;
+		if (1 != qrecv(now.served[ Index(((int)((P3 *)_this)->current_elevator), 3) ], 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.served[ Index(((int)((P3 *)_this)->current_elevator), 2) ]-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.served[ Index(((int)((P3 *)_this)->current_elevator), 3) ]-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.served[ Index(((int)((P3 *)_this)->current_elevator), 2) ], XX-1, 0, 1);
+		qrecv(now.served[ Index(((int)((P3 *)_this)->current_elevator), 3) ], XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.served[ Index(((int)((P3 *)_this)->current_elevator), 2) ]);
+			sprintf(simvals, "%d?", now.served[ Index(((int)((P3 *)_this)->current_elevator), 3) ]);
 			sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.served[ Index(((int)((P3 *)_this)->current_elevator), 2) ]))
+		if (q_zero(now.served[ Index(((int)((P3 *)_this)->current_elevator), 3) ]))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -367,17 +367,17 @@
 		 /* PROC main_control */
 	case 27: // STATE 1 - multi-j.pml:77 - [go[elevator_id]?dest] (0:0:1 - 1)
 		reached[2][1] = 1;
-		if (q_zero(now.go[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
-		{	if (boq != now.go[ Index(((int)((P2 *)_this)->elevator_id), 2) ]) continue;
+		if (q_zero(now.go[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
+		{	if (boq != now.go[ Index(((int)((P2 *)_this)->elevator_id), 3) ]) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.go[ Index(((int)((P2 *)_this)->elevator_id), 2) ]) == 0) continue;
+		if (q_len(now.go[ Index(((int)((P2 *)_this)->elevator_id), 3) ]) == 0) continue;
 
 		XX=1;
 		(trpt+1)->bup.oval = ((int)((P2 *)_this)->dest);
 		;
-		((P2 *)_this)->dest = qrecv(now.go[ Index(((int)((P2 *)_this)->elevator_id), 2) ], XX-1, 0, 1);
+		((P2 *)_this)->dest = qrecv(now.go[ Index(((int)((P2 *)_this)->elevator_id), 3) ], XX-1, 0, 1);
 #ifdef VAR_RANGES
 		logval("main_control:dest", ((int)((P2 *)_this)->dest));
 #endif
@@ -386,11 +386,11 @@
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.go[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d?", now.go[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 			sprintf(simtmp, "%d", ((int)((P2 *)_this)->dest)); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.go[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_zero(now.go[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -416,45 +416,45 @@
 	case 28: // STATE 2 - multi-j.pml:78 - [move[elevator_id]!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][2] = 1;
-		if (q_full(now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_full(now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d!", now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 		sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ], 0, 1, 1);
-		if (q_zero(now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ])) { boq = now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ]; };
+		qsend(now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ], 0, 1, 1);
+		if (q_zero(now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ])) { boq = now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 29: // STATE 3 - multi-j.pml:81 - [floor_reached[elevator_id]?1] (0:0:0 - 1)
 		reached[2][3] = 1;
-		if (q_zero(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
-		{	if (boq != now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 2) ]) continue;
+		if (q_zero(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
+		{	if (boq != now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 3) ]) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 2) ]) == 0) continue;
+		if (q_len(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 3) ]) == 0) continue;
 
 		XX=1;
-		if (1 != qrecv(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 2) ], 0, 0, 0)) continue;
+		if (1 != qrecv(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 3) ], 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 2) ]-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 3) ]-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 2) ], XX-1, 0, 1);
+		qrecv(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 3) ], XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d?", now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 			sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_zero(now.floor_reached[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -480,66 +480,66 @@
 	case 30: // STATE 4 - multi-j.pml:83 - [((current_floor[elevator_id]==dest))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][4] = 1;
-		if (!((((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 2) ])==((int)((P2 *)_this)->dest))))
+		if (!((((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 3) ])==((int)((P2 *)_this)->dest))))
 			continue;
 		_m = 3; goto P999; /* 0 */
 	case 31: // STATE 5 - multi-j.pml:84 - [move[elevator_id]!0] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][5] = 1;
-		if (q_full(now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_full(now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d!", now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 		sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ], 0, 0, 1);
-		if (q_zero(now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ])) { boq = now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ]; };
+		qsend(now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ], 0, 0, 1);
+		if (q_zero(now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ])) { boq = now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 32: // STATE 6 - multi-j.pml:85 - [update_cabin_door[elevator_id]!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][6] = 1;
-		if (q_full(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_full(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d!", now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 		sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ], 0, 1, 1);
-		if (q_zero(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ])) { boq = now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ]; };
+		qsend(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ], 0, 1, 1);
+		if (q_zero(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ])) { boq = now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 33: // STATE 7 - multi-j.pml:87 - [cabin_door_updated[elevator_id]?1] (0:0:0 - 1)
 		reached[2][7] = 1;
-		if (q_zero(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
-		{	if (boq != now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]) continue;
+		if (q_zero(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
+		{	if (boq != now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]) == 0) continue;
+		if (q_len(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]) == 0) continue;
 
 		XX=1;
-		if (1 != qrecv(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ], 0, 0, 0)) continue;
+		if (1 != qrecv(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ], 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ], XX-1, 0, 1);
+		qrecv(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ], XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d?", now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 			sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_zero(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -565,45 +565,45 @@
 	case 34: // STATE 8 - multi-j.pml:89 - [update_cabin_door[elevator_id]!0] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][8] = 1;
-		if (q_full(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_full(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d!", now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 		sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ], 0, 0, 1);
-		if (q_zero(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ])) { boq = now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 2) ]; };
+		qsend(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ], 0, 0, 1);
+		if (q_zero(now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ])) { boq = now.update_cabin_door[ Index(((int)((P2 *)_this)->elevator_id), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 35: // STATE 11 - multi-j.pml:92 - [cabin_door_updated[elevator_id]?0] (0:0:0 - 1)
 		reached[2][11] = 1;
-		if (q_zero(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
-		{	if (boq != now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]) continue;
+		if (q_zero(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
+		{	if (boq != now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]) == 0) continue;
+		if (q_len(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]) == 0) continue;
 
 		XX=1;
-		if (0 != qrecv(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ], 0, 0, 0)) continue;
+		if (0 != qrecv(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ], 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ], XX-1, 0, 1);
+		qrecv(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ], XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d?", now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 			sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_zero(now.cabin_door_updated[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -629,104 +629,104 @@
 	case 36: // STATE 12 - multi-j.pml:93 - [floor_request_made[dest] = 0] (0:0:1 - 1)
 		IfNotBlocked
 		reached[2][12] = 1;
-		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 4) ]);
-		now.floor_request_made[ Index(((P2 *)_this)->dest, 4) ] = 0;
+		(trpt+1)->bup.oval = ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 3) ]);
+		now.floor_request_made[ Index(((P2 *)_this)->dest, 3) ] = 0;
 #ifdef VAR_RANGES
-		logval("floor_request_made[main_control:dest]", ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 4) ]));
+		logval("floor_request_made[main_control:dest]", ((int)now.floor_request_made[ Index(((int)((P2 *)_this)->dest), 3) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 37: // STATE 13 - multi-j.pml:94 - [served[elevator_id]!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][13] = 1;
-		if (q_full(now.served[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_full(now.served[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.served[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d!", now.served[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 		sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.served[ Index(((int)((P2 *)_this)->elevator_id), 2) ], 0, 1, 1);
-		if (q_zero(now.served[ Index(((int)((P2 *)_this)->elevator_id), 2) ])) { boq = now.served[ Index(((int)((P2 *)_this)->elevator_id), 2) ]; };
+		qsend(now.served[ Index(((int)((P2 *)_this)->elevator_id), 3) ], 0, 1, 1);
+		if (q_zero(now.served[ Index(((int)((P2 *)_this)->elevator_id), 3) ])) { boq = now.served[ Index(((int)((P2 *)_this)->elevator_id), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 38: // STATE 14 - multi-j.pml:95 - [direction[elevator_id] = none] (0:0:1 - 1)
 		IfNotBlocked
 		reached[2][14] = 1;
-		(trpt+1)->bup.oval = direction[ Index(((int)((P2 *)_this)->elevator_id), 2) ];
-		direction[ Index(((P2 *)_this)->elevator_id, 2) ] = 1;
+		(trpt+1)->bup.oval = direction[ Index(((int)((P2 *)_this)->elevator_id), 3) ];
+		direction[ Index(((P2 *)_this)->elevator_id, 3) ] = 1;
 #ifdef VAR_RANGES
-		logval("direction[main_control:elevator_id]", direction[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+		logval("direction[main_control:elevator_id]", direction[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 39: // STATE 18 - multi-j.pml:98 - [((dest>current_floor[elevator_id]))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][18] = 1;
-		if (!((((int)((P2 *)_this)->dest)>((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))))
+		if (!((((int)((P2 *)_this)->dest)>((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))))
 			continue;
 		_m = 3; goto P999; /* 0 */
 	case 40: // STATE 19 - multi-j.pml:99 - [current_floor[elevator_id] = (current_floor[elevator_id]+1)] (0:0:1 - 1)
 		IfNotBlocked
 		reached[2][19] = 1;
-		(trpt+1)->bup.oval = ((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
-		now.current_floor[ Index(((P2 *)_this)->elevator_id, 2) ] = (((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 2) ])+1);
+		(trpt+1)->bup.oval = ((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
+		now.current_floor[ Index(((P2 *)_this)->elevator_id, 3) ] = (((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 3) ])+1);
 #ifdef VAR_RANGES
-		logval("current_floor[main_control:elevator_id]", ((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 2) ]));
+		logval("current_floor[main_control:elevator_id]", ((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 3) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 41: // STATE 20 - multi-j.pml:100 - [direction[elevator_id] = up] (0:0:1 - 1)
 		IfNotBlocked
 		reached[2][20] = 1;
-		(trpt+1)->bup.oval = direction[ Index(((int)((P2 *)_this)->elevator_id), 2) ];
-		direction[ Index(((P2 *)_this)->elevator_id, 2) ] = 2;
+		(trpt+1)->bup.oval = direction[ Index(((int)((P2 *)_this)->elevator_id), 3) ];
+		direction[ Index(((P2 *)_this)->elevator_id, 3) ] = 2;
 #ifdef VAR_RANGES
-		logval("direction[main_control:elevator_id]", direction[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+		logval("direction[main_control:elevator_id]", direction[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 42: // STATE 21 - multi-j.pml:101 - [((dest<current_floor[elevator_id]))] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][21] = 1;
-		if (!((((int)((P2 *)_this)->dest)<((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))))
+		if (!((((int)((P2 *)_this)->dest)<((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))))
 			continue;
 		_m = 3; goto P999; /* 0 */
 	case 43: // STATE 22 - multi-j.pml:102 - [current_floor[elevator_id] = (current_floor[elevator_id]-1)] (0:0:1 - 1)
 		IfNotBlocked
 		reached[2][22] = 1;
-		(trpt+1)->bup.oval = ((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
-		now.current_floor[ Index(((P2 *)_this)->elevator_id, 2) ] = (((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 2) ])-1);
+		(trpt+1)->bup.oval = ((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
+		now.current_floor[ Index(((P2 *)_this)->elevator_id, 3) ] = (((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 3) ])-1);
 #ifdef VAR_RANGES
-		logval("current_floor[main_control:elevator_id]", ((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 2) ]));
+		logval("current_floor[main_control:elevator_id]", ((int)now.current_floor[ Index(((int)((P2 *)_this)->elevator_id), 3) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 44: // STATE 23 - multi-j.pml:103 - [direction[elevator_id] = down] (0:0:1 - 1)
 		IfNotBlocked
 		reached[2][23] = 1;
-		(trpt+1)->bup.oval = direction[ Index(((int)((P2 *)_this)->elevator_id), 2) ];
-		direction[ Index(((P2 *)_this)->elevator_id, 2) ] = 3;
+		(trpt+1)->bup.oval = direction[ Index(((int)((P2 *)_this)->elevator_id), 3) ];
+		direction[ Index(((P2 *)_this)->elevator_id, 3) ] = 3;
 #ifdef VAR_RANGES
-		logval("direction[main_control:elevator_id]", direction[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+		logval("direction[main_control:elevator_id]", direction[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 45: // STATE 25 - multi-j.pml:106 - [move[elevator_id]!0] (0:0:0 - 1)
 		IfNotBlocked
 		reached[2][25] = 1;
-		if (q_full(now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ]))
+		if (q_full(now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d!", now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ]);
 		sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ], 0, 0, 1);
-		if (q_zero(now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ])) { boq = now.move[ Index(((int)((P2 *)_this)->elevator_id), 2) ]; };
+		qsend(now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ], 0, 0, 1);
+		if (q_zero(now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ])) { boq = now.move[ Index(((int)((P2 *)_this)->elevator_id), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 46: // STATE 35 - multi-j.pml:111 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
@@ -737,31 +737,31 @@
 		 /* PROC elevator_engine */
 	case 47: // STATE 1 - multi-j.pml:65 - [move[elevator_id]?1] (0:0:0 - 1)
 		reached[1][1] = 1;
-		if (q_zero(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]))
-		{	if (boq != now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]) continue;
+		if (q_zero(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]))
+		{	if (boq != now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]) == 0) continue;
+		if (q_len(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]) == 0) continue;
 
 		XX=1;
-		if (1 != qrecv(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ], 0, 0, 0)) continue;
+		if (1 != qrecv(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ], 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ], XX-1, 0, 1);
+		qrecv(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ], XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d?", now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]);
 			sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]))
+		if (q_zero(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -786,31 +786,31 @@
 		_m = 4; goto P999; /* 0 */
 	case 48: // STATE 2 - multi-j.pml:67 - [move[elevator_id]?0] (0:0:0 - 1)
 		reached[1][2] = 1;
-		if (q_zero(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]))
-		{	if (boq != now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]) continue;
+		if (q_zero(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]))
+		{	if (boq != now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]) == 0) continue;
+		if (q_len(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]) == 0) continue;
 
 		XX=1;
-		if (0 != qrecv(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ], 0, 0, 0)) continue;
+		if (0 != qrecv(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ], 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ], XX-1, 0, 1);
+		qrecv(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ], XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d?", now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]);
 			sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.move[ Index(((int)((P1 *)_this)->elevator_id), 2) ]))
+		if (q_zero(now.move[ Index(((int)((P1 *)_this)->elevator_id), 3) ]))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -836,17 +836,17 @@
 	case 49: // STATE 4 - multi-j.pml:68 - [floor_reached[elevator_id]!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[1][4] = 1;
-		if (q_full(now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 2) ]))
+		if (q_full(now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d!", now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 3) ]);
 		sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 2) ], 0, 1, 1);
-		if (q_zero(now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 2) ])) { boq = now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 2) ]; };
+		qsend(now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 3) ], 0, 1, 1);
+		if (q_zero(now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 3) ])) { boq = now.floor_reached[ Index(((int)((P1 *)_this)->elevator_id), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 50: // STATE 11 - multi-j.pml:71 - [-end-] (0:0:0 - 1)
 		IfNotBlocked
@@ -857,31 +857,31 @@
 		 /* PROC cabin_door */
 	case 51: // STATE 1 - multi-j.pml:51 - [update_cabin_door[elevator_id]?1] (0:0:0 - 1)
 		reached[0][1] = 1;
-		if (q_zero(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]))
-		{	if (boq != now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]) continue;
+		if (q_zero(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]))
+		{	if (boq != now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]) == 0) continue;
+		if (q_len(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]) == 0) continue;
 
 		XX=1;
-		if (1 != qrecv(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ], 0, 0, 0)) continue;
+		if (1 != qrecv(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ], 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ], XX-1, 0, 1);
+		qrecv(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ], XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d?", now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]);
 			sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]))
+		if (q_zero(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -907,65 +907,65 @@
 	case 52: // STATE 2 - multi-j.pml:52 - [elevator[elevator_id].door_open[current_floor[elevator_id]] = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][2] = 1;
-		(trpt+1)->bup.oval = ((int)now.elevator[ Index(((int)((P0 *)_this)->elevator_id), 2) ].door_open[ Index(((int)now.current_floor[ Index(((int)((P0 *)_this)->elevator_id), 2) ]), 4) ]);
-		now.elevator[ Index(((P0 *)_this)->elevator_id, 2) ].door_open[ Index(now.current_floor[ Index(((P0 *)_this)->elevator_id, 2) ], 4) ] = 1;
+		(trpt+1)->bup.oval = ((int)now.elevator[ Index(((int)((P0 *)_this)->elevator_id), 3) ].door_open[ Index(((int)now.current_floor[ Index(((int)((P0 *)_this)->elevator_id), 3) ]), 3) ]);
+		now.elevator[ Index(((P0 *)_this)->elevator_id, 3) ].door_open[ Index(now.current_floor[ Index(((P0 *)_this)->elevator_id, 3) ], 3) ] = 1;
 #ifdef VAR_RANGES
-		logval("elevator[cabin_door:elevator_id].door_open[current_floor[cabin_door:elevator_id]]", ((int)now.elevator[ Index(((int)((P0 *)_this)->elevator_id), 2) ].door_open[ Index(((int)now.current_floor[ Index(((int)((P0 *)_this)->elevator_id), 2) ]), 4) ]));
+		logval("elevator[cabin_door:elevator_id].door_open[current_floor[cabin_door:elevator_id]]", ((int)now.elevator[ Index(((int)((P0 *)_this)->elevator_id), 3) ].door_open[ Index(((int)now.current_floor[ Index(((int)((P0 *)_this)->elevator_id), 3) ]), 3) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 53: // STATE 3 - multi-j.pml:53 - [cabin_door_is_open[elevator_id] = 1] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][3] = 1;
-		(trpt+1)->bup.oval = ((int)cabin_door_is_open[ Index(((int)((P0 *)_this)->elevator_id), 2) ]);
-		cabin_door_is_open[ Index(((P0 *)_this)->elevator_id, 2) ] = 1;
+		(trpt+1)->bup.oval = ((int)cabin_door_is_open[ Index(((int)((P0 *)_this)->elevator_id), 3) ]);
+		cabin_door_is_open[ Index(((P0 *)_this)->elevator_id, 3) ] = 1;
 #ifdef VAR_RANGES
-		logval("cabin_door_is_open[cabin_door:elevator_id]", ((int)cabin_door_is_open[ Index(((int)((P0 *)_this)->elevator_id), 2) ]));
+		logval("cabin_door_is_open[cabin_door:elevator_id]", ((int)cabin_door_is_open[ Index(((int)((P0 *)_this)->elevator_id), 3) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 54: // STATE 4 - multi-j.pml:54 - [cabin_door_updated[elevator_id]!1] (0:0:0 - 1)
 		IfNotBlocked
 		reached[0][4] = 1;
-		if (q_full(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ]))
+		if (q_full(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d!", now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ]);
 		sprintf(simtmp, "%d", 1); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ], 0, 1, 1);
-		if (q_zero(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ])) { boq = now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ]; };
+		qsend(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ], 0, 1, 1);
+		if (q_zero(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ])) { boq = now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 55: // STATE 5 - multi-j.pml:55 - [update_cabin_door[elevator_id]?0] (0:0:0 - 1)
 		reached[0][5] = 1;
-		if (q_zero(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]))
-		{	if (boq != now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]) continue;
+		if (q_zero(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]))
+		{	if (boq != now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]) continue;
 		} else
 		{	if (boq != -1) continue;
 		}
-		if (q_len(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]) == 0) continue;
+		if (q_len(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]) == 0) continue;
 
 		XX=1;
-		if (0 != qrecv(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ], 0, 0, 0)) continue;
+		if (0 != qrecv(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ], 0, 0, 0)) continue;
 		
 #ifndef BFS_PAR
-		if (q_flds[((Q0 *)qptr(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]-1))->_t] != 1)
+		if (q_flds[((Q0 *)qptr(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]-1))->_t] != 1)
 			Uerror("wrong nr of msg fields in rcv");
 #endif
 		;
-		qrecv(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ], XX-1, 0, 1);
+		qrecv(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ], XX-1, 0, 1);
 		
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[32];
-			sprintf(simvals, "%d?", now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d?", now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]);
 			sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);
 		}
 #endif
-		if (q_zero(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 2) ]))
+		if (q_zero(now.update_cabin_door[ Index(((int)((P0 *)_this)->elevator_id), 3) ]))
 		{	boq = -1;
 #ifndef NOFAIR
 			if (fairness
@@ -991,37 +991,37 @@
 	case 56: // STATE 6 - multi-j.pml:56 - [cabin_door_is_open[elevator_id] = 0] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][6] = 1;
-		(trpt+1)->bup.oval = ((int)cabin_door_is_open[ Index(((int)((P0 *)_this)->elevator_id), 2) ]);
-		cabin_door_is_open[ Index(((P0 *)_this)->elevator_id, 2) ] = 0;
+		(trpt+1)->bup.oval = ((int)cabin_door_is_open[ Index(((int)((P0 *)_this)->elevator_id), 3) ]);
+		cabin_door_is_open[ Index(((P0 *)_this)->elevator_id, 3) ] = 0;
 #ifdef VAR_RANGES
-		logval("cabin_door_is_open[cabin_door:elevator_id]", ((int)cabin_door_is_open[ Index(((int)((P0 *)_this)->elevator_id), 2) ]));
+		logval("cabin_door_is_open[cabin_door:elevator_id]", ((int)cabin_door_is_open[ Index(((int)((P0 *)_this)->elevator_id), 3) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 57: // STATE 7 - multi-j.pml:57 - [elevator[elevator_id].door_open[current_floor[elevator_id]] = 0] (0:0:1 - 1)
 		IfNotBlocked
 		reached[0][7] = 1;
-		(trpt+1)->bup.oval = ((int)now.elevator[ Index(((int)((P0 *)_this)->elevator_id), 2) ].door_open[ Index(((int)now.current_floor[ Index(((int)((P0 *)_this)->elevator_id), 2) ]), 4) ]);
-		now.elevator[ Index(((P0 *)_this)->elevator_id, 2) ].door_open[ Index(now.current_floor[ Index(((P0 *)_this)->elevator_id, 2) ], 4) ] = 0;
+		(trpt+1)->bup.oval = ((int)now.elevator[ Index(((int)((P0 *)_this)->elevator_id), 3) ].door_open[ Index(((int)now.current_floor[ Index(((int)((P0 *)_this)->elevator_id), 3) ]), 3) ]);
+		now.elevator[ Index(((P0 *)_this)->elevator_id, 3) ].door_open[ Index(now.current_floor[ Index(((P0 *)_this)->elevator_id, 3) ], 3) ] = 0;
 #ifdef VAR_RANGES
-		logval("elevator[cabin_door:elevator_id].door_open[current_floor[cabin_door:elevator_id]]", ((int)now.elevator[ Index(((int)((P0 *)_this)->elevator_id), 2) ].door_open[ Index(((int)now.current_floor[ Index(((int)((P0 *)_this)->elevator_id), 2) ]), 4) ]));
+		logval("elevator[cabin_door:elevator_id].door_open[current_floor[cabin_door:elevator_id]]", ((int)now.elevator[ Index(((int)((P0 *)_this)->elevator_id), 3) ].door_open[ Index(((int)now.current_floor[ Index(((int)((P0 *)_this)->elevator_id), 3) ]), 3) ]));
 #endif
 		;
 		_m = 3; goto P999; /* 0 */
 	case 58: // STATE 8 - multi-j.pml:58 - [cabin_door_updated[elevator_id]!0] (0:0:0 - 1)
 		IfNotBlocked
 		reached[0][8] = 1;
-		if (q_full(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ]))
+		if (q_full(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ]))
 			continue;
 #ifdef HAS_CODE
 		if (readtrail && gui) {
 			char simtmp[64];
-			sprintf(simvals, "%d!", now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ]);
+			sprintf(simvals, "%d!", now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ]);
 		sprintf(simtmp, "%d", 0); strcat(simvals, simtmp);		}
 #endif
 		
-		qsend(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ], 0, 0, 1);
-		if (q_zero(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ])) { boq = now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 2) ]; };
+		qsend(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ], 0, 0, 1);
+		if (q_zero(now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ])) { boq = now.cabin_door_updated[ Index(((int)((P0 *)_this)->elevator_id), 3) ]; };
 		_m = 2; goto P999; /* 0 */
 	case 59: // STATE 12 - multi-j.pml:60 - [-end-] (0:0:0 - 1)
 		IfNotBlocked

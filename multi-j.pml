@@ -14,9 +14,9 @@
 
 
 // the number of floors
-#define N	4
+#define N	3
 // the number of elevators
-#define M 2
+#define M 3
 // type for direction of elevator
 mtype { down, up, none };
 mtype direction[M];
