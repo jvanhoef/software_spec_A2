@@ -132,20 +132,20 @@ typedef struct S_F_MAP {
 	int upto;
 } S_F_MAP;
 
-#define _nstates5	23	/* :init: */
-#define minseq5	78
-#define maxseq5	99
-#define _endstate5	22
+#define _nstates5	26	/* :init: */
+#define minseq5	80
+#define maxseq5	104
+#define _endstate5	25
 
 #define _nstates4	9	/* req_button */
-#define minseq4	70
-#define maxseq4	77
+#define minseq4	72
+#define maxseq4	79
 #define _endstate4	8
 
-#define _nstates3	13	/* req_handler */
+#define _nstates3	15	/* req_handler */
 #define minseq3	58
-#define maxseq3	69
-#define _endstate3	12
+#define maxseq3	71
+#define _endstate3	14
 
 #define _nstates2	36	/* main_control */
 #define minseq2	23
@@ -176,8 +176,8 @@ extern S_F_MAP src_file1[];
 extern S_F_MAP src_file0[];
 
 #define T_ID	unsigned char
-#define _T5	59
-#define _T2	60
+#define _T5	60
+#define _T2	61
 #define WS		8 /* word size in bytes */
 #define SYNC	6
 #define ASYNC	1
@@ -503,7 +503,6 @@ typedef struct TRIX_v6 {
 #define HAS_TRACK	0
 /* hidden variable: */	uchar cabin_door_is_open[2];
 /* hidden variable: */	uchar elevator_counter;
-/* hidden variable: */	uchar floor_request_nr;
 /* hidden variable: */	uchar direction[2];
 #define FORWARD_MOVES	"pan.m"
 #define BACKWARD_MOVES	"pan.b"
@@ -513,9 +512,9 @@ typedef struct TRIX_v6 {
 #define _endstate6	2 /* np_ */
 
 #define _start6	0 /* np_ */
-#define _start5	21
+#define _start5	24
 #define _start4	5
-#define _start3	9
+#define _start3	11
 #define _start2	32
 #define _start1	8
 #define _start0	9
@@ -969,7 +968,7 @@ void qsend(int, int, int, int);
 #define GLOBAL	7
 #define BAD	8
 #define ALPHA_F	9
-#define NTRANS	61
+#define NTRANS	62
 #if defined(BFS_PAR) || NCORE>1
 	void e_critical(int);
 	void x_critical(int);

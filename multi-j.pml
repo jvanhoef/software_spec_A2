@@ -27,8 +27,6 @@ bool floor_request_made[N];
 //global byte to make sure every process has a correct elevator number
 byte elevator_counter = 0;
 
-// number for which floor the request is made
-byte floor_request_nr = 0;
 // status of floor doors of the shaft of the M elevator using 2D array 
 typedef elevs {
   bool door_open[N];
@@ -118,13 +116,14 @@ proctype req_handler() {
 	byte current_elevator = 0;
 	do
 	:: request?dest -> 
-		go[current_elevator]!dest; 
-		served[current_elevator]?true;
-		current_elevator++;
 		if
 		:: current_elevator == M ->
 			current_elevator = 0;
+		:: else -> skip;
 		fi;
+		go[current_elevator]!dest; 
+		served[current_elevator]?true;
+		current_elevator++;
 	od;
 }
 
@@ -150,10 +149,13 @@ init {
 			run cabin_door(elevator_nr);
 			run elevator_engine(elevator_nr);
 			run main_control(elevator_nr);
+			current_floor[elevator_nr] = 0;
+			cabin_door_is_open[elevator_nr] = false;
 
 			elevator_nr++;
 		:: elevator_nr == M -> break;
 		od;
+		floor_nr = 0;
 		do
 		//create a request process per floor
 		:: floor_nr < N ->

@@ -503,23 +503,25 @@ int _;	/* predefined write-only variable */
 #endif
 
 short src_ln5 [] = {
-	  0, 148, 149, 152, 153, 154, 155, 157, 
-	158, 158, 151, 160, 151, 162, 163, 164, 
-	165, 165, 160, 167, 160, 147, 168,   0, };
+	  0, 144, 145, 148, 149, 150, 151, 152, 
+	153, 155, 156, 156, 147, 158, 147, 158, 
+	161, 162, 163, 164, 164, 159, 166, 159, 
+	143, 167,   0, };
 S_F_MAP src_file5 [] = {
 	{ "-", 0, 0 },
-	{ "multi-j.pml", 1, 22 },
-	{ "-", 23, 24 }
+	{ "multi-j.pml", 1, 25 },
+	{ "-", 26, 27 }
 };
 uchar reached5 [] = {
 	  0,   1,   0,   1,   0,   0,   0,   0, 
-	  1,   1,   0,   1,   1,   1,   0,   0, 
-	  1,   1,   0,   1,   1,   0,   0,   0, };
+	  0,   0,   1,   1,   0,   1,   1,   0, 
+	  1,   0,   0,   1,   1,   0,   1,   1, 
+	  0,   0,   0, };
 uchar *loopstate5;
 
 short src_ln4 [] = {
-	  0, 137, 139, 140, 138, 136, 143, 136, 
-	143,   0, };
+	  0, 133, 135, 136, 134, 132, 139, 132, 
+	139,   0, };
 S_F_MAP src_file4 [] = {
 	{ "-", 0, 0 },
 	{ "multi-j.pml", 1, 8 },
@@ -531,24 +533,24 @@ uchar reached4 [] = {
 uchar *loopstate4;
 
 short src_ln3 [] = {
-	  0, 123, 124, 125, 126, 128, 129, 127, 
-	131, 122, 132, 122, 132,   0, };
+	  0, 118, 120, 121, 122, 122, 119, 124, 
+	124, 125, 126, 117, 128, 117, 128,   0, };
 S_F_MAP src_file3 [] = {
 	{ "-", 0, 0 },
-	{ "multi-j.pml", 1, 12 },
-	{ "-", 13, 14 }
+	{ "multi-j.pml", 1, 14 },
+	{ "-", 15, 16 }
 };
 uchar reached3 [] = {
-	  0,   1,   0,   0,   0,   1,   0,   0, 
-	  1,   0,   1,   1,   0,   0, };
+	  0,   1,   1,   0,   1,   1,   0,   1, 
+	  0,   0,   0,   0,   1,   1,   0,   0, };
 uchar *loopstate3;
 
 short src_ln2 [] = {
-	  0,  82,  83,  86,  88,  89,  90,  92, 
-	 94,  91,  96,  97,  98,  99, 100,  96, 
-	102, 102, 103, 104, 105, 106, 107, 108, 
-	109, 111, 112,  87, 114,  85, 115,  85, 
-	 81, 116,  81, 116,   0, };
+	  0,  77,  78,  81,  83,  84,  85,  87, 
+	 89,  86,  91,  92,  93,  94,  95,  91, 
+	 97,  97,  98,  99, 100, 101, 102, 103, 
+	104, 106, 107,  82, 109,  80, 110,  80, 
+	 76, 111,  76, 111,   0, };
 S_F_MAP src_file2 [] = {
 	{ "-", 0, 0 },
 	{ "multi-j.pml", 1, 35 },
@@ -563,8 +565,8 @@ uchar reached2 [] = {
 uchar *loopstate2;
 
 short src_ln1 [] = {
-	  0,  70,  72,  72,  73,  71,  75,  71, 
-	 69,  76,  69,  76,   0, };
+	  0,  65,  67,  67,  68,  66,  70,  66, 
+	 64,  71,  64,  71,   0, };
 S_F_MAP src_file1 [] = {
 	{ "-", 0, 0 },
 	{ "multi-j.pml", 1, 11 },
@@ -576,8 +578,8 @@ uchar reached1 [] = {
 uchar *loopstate1;
 
 short src_ln0 [] = {
-	  0,  56,  57,  58,  59,  60,  61,  62, 
-	 63,  55,  65,  55,  65,   0, };
+	  0,  51,  52,  53,  54,  55,  56,  57, 
+	 58,  50,  60,  50,  60,   0, };
 S_F_MAP src_file0 [] = {
 	{ "-", 0, 0 },
 	{ "multi-j.pml", 1, 12 },
@@ -913,11 +915,11 @@ addproc(int calling_pid, int priority, int n, int par0)
 		break;
 	case 5:	/* :init: */
 		((P5 *)pptr(h))->_t = 5;
-		((P5 *)pptr(h))->_p = 21;
+		((P5 *)pptr(h))->_p = 24;
 #ifdef HAS_PRIORITY
 		((P5 *)pptr(h))->_priority = priority; /* was: 1 */
 #endif
-		reached5[21]=1;
+		reached5[24]=1;
 		/* params: */
 		/* locals: */
 		((P5 *)pptr(h))->elevator_nr = 0;
@@ -949,11 +951,11 @@ addproc(int calling_pid, int priority, int n, int par0)
 		break;
 	case 3:	/* req_handler */
 		((P3 *)pptr(h))->_t = 3;
-		((P3 *)pptr(h))->_p = 9;
+		((P3 *)pptr(h))->_p = 11;
 #ifdef HAS_PRIORITY
 		((P3 *)pptr(h))->_priority = priority; /* was: 1 */
 #endif
-		reached3[9]=1;
+		reached3[11]=1;
 		/* params: */
 		/* locals: */
 		((P3 *)pptr(h))->dest = 0;
@@ -12581,7 +12583,6 @@ iniglobals(int calling_pid)
 		}
 	}
 		elevator_counter = 0;
-		floor_request_nr = 0;
 	{	int l_in;
 		for (l_in = 0; l_in < 2; l_in++)
 		{
@@ -15161,7 +15162,7 @@ c_chandump(int from)
 	printf("\n");
 }
 
-Trans *t_id_lkup[100];
+Trans *t_id_lkup[105];
 
 
 #ifdef BFS_PAR
