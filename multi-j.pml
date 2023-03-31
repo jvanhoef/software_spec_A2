@@ -7,16 +7,25 @@
 //ltl p1 { []<> (floor_request_made[1]==true) } /* this property does not hold, as a request for floor 1 can be indefinitely postponed. */
 //ltl p2 { []<> (cabin_door_is_open==true) } /* this property should hold, but does not yet; at any moment during an execution, the opening of the cabin door will happen at some later point. */
 
-// ltl p1 { []<> (floor_request_made[0] -> current_floor == 0 ) }; // holds
-// ltl p2 { []<> (floor_request_made[2] -> current_floor == 2) }; // holds
-// ltl p3 { []<>cabin_door_is_open}; // doesnt hold
-// ltl p4 { []<>!cabin_door_is_open	};	// holds
+
+//single elevator
+// ltl a1 { []<> (floor_request_made[0] -> current_floor == 0 ) }; // holds
+// ltl a2 { []<> (floor_request_made[2] -> current_floor == 2) }; // holds
+// ltl b1 { []<>cabin_door_is_open}; // doesnt hold
+// ltl b2 { []<>!cabin_door_is_open	};	// holds
+//multi elevator
+ltl e1 {<> (floor_request_made[0] <-> floor_request_made[0] == false)};
+//ltl e2 {<> (floor_request_made[1] <-> !floor_request_made[1])};
+//ltl e3 {<> (floor_request_made[2] <-> !floor_request_made[2])};
+
+//ltl f1 {<>served[0]}
+//ltl f1 {<>served[1]}
 
 
 // the number of floors
-#define N	3
+#define N	4
 // the number of elevators
-#define M 3
+#define M 2
 // type for direction of elevator
 mtype { down, up, none };
 mtype direction[M];
@@ -92,6 +101,7 @@ proctype main_control(byte elevator_id) {
 				:: cabin_door_updated[elevator_id]?false ->
 					floor_request_made[dest] = false;
 					served[elevator_id]!true;
+					//assert(current_floor[elevator_id]==dest);
 					direction[elevator_id] = none;
 				fi;
 				break;
@@ -110,7 +120,7 @@ proctype main_control(byte elevator_id) {
 	od;
 }
 
-// request handler process TODO
+// request handler process 
 proctype req_handler() {
 	byte dest;
 	byte current_elevator = 0;
@@ -164,4 +174,4 @@ init {
 		:: floor_nr == N -> break;
 		od;
 	}
-}
+	}
