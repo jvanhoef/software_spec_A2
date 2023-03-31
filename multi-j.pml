@@ -14,18 +14,18 @@
 // ltl b1 { []<>cabin_door_is_open}; // doesnt hold
 // ltl b2 { []<>!cabin_door_is_open	};	// holds
 //multi elevator
-ltl e1 {<> (floor_request_made[0] <-> floor_request_made[0] == false)};
-//ltl e2 {<> (floor_request_made[1] <-> !floor_request_made[1])};
-//ltl e3 {<> (floor_request_made[2] <-> !floor_request_made[2])};
+//ltl e1 {<> (floor_request_made[0] -> floor_request_made[0] == false)};
+//ltl e2 {<> (floor_request_made[1] -> !floor_request_made[1])};
+//ltl e3 {<> (floor_request_made[2] -> !floor_request_made[2])};
 
 //ltl f1 {<>served[0]}
 //ltl f1 {<>served[1]}
 
 
 // the number of floors
-#define N	4
+#define N	2
 // the number of elevators
-#define M 2
+#define M 5
 // type for direction of elevator
 mtype { down, up, none };
 mtype direction[M];
@@ -94,7 +94,6 @@ proctype main_control(byte elevator_id) {
 				update_cabin_door[elevator_id]!true;
 				if
 				:: cabin_door_updated[elevator_id]?true ->
-					//assert (cabin_door_is_open[elevator_id] && elevator[elevator_id].door_open[current_floor[elevator_id]])
 					update_cabin_door[elevator_id]!false;
 				fi;
 				if
